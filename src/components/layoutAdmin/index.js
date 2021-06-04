@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './header'
 import Footer from './footer'
 
-const Layout = (props) => {
+const LayoutAdmin = (props) => {
   return(
     <>
       <Header/>
@@ -12,4 +12,4 @@ const Layout = (props) => {
   )
 }
 
-export default Layout
+export default LayoutAdmin
