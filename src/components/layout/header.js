@@ -12,7 +12,6 @@ const Header = () => {
           <Link to="products"> Produtos</Link>
           <Link to="suppliers"> Fornecedores</Link>
           <Link to="clients"> Clientes</Link>
-          <Link to="admin"> Admin</Link>
           <Link to="signin"> Login</Link>
       </Nav>
     </HeaderTag>

@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store'
 import Routers from './routers';
+import ReduxToastr from './components/redux-toastr';
+
 
 ReactDOM.render(
   <Provider store={store}>
+    <ReduxToastr/>
     <Routers />
   </Provider>,
   document.getElementById('root')
