@@ -1,8 +1,8 @@
 import TYPES from '../types'
-import { categoryCreate } from '../../services/categories.service'
+import { createCategory } from '../../services/categories.service'
 import { toastr } from 'react-redux-toastr'
 
-export const crate = (data) => {
+export const create = (data) => {
   return async (dispatch) => {
     const config = {
       headers: {
@@ -24,7 +24,7 @@ export const crate = (data) => {
     try {
       const formData = new FormData()
       Object.keys(data).map((k) => FormData.append(k, data[k]))
-      const result = await categoryCreate(formData, config)
+      const result = await createCategory(formData, config)
       dispatch({ type: TYPES.PRODUCT_CREATE, data: result.data })
       toastr.success("Category", "Successs! The new category has been registered.")
     } catch (error) {

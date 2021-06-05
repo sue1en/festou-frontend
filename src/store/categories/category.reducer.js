@@ -1,5 +1,4 @@
 import TYPES from '../types'
-import { getToken, getUser} from '../../config/storage'
 
 const INITIAL_STATE = {
   loading: false,

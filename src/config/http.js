@@ -3,7 +3,9 @@ import { getToken } from './storage';
 import store from '../store';
 import storage from './storage'
 
-const urlApi = process.env.REACT_APP_API;
+// const urlApi = process.env.REACT_APP_API;
+const urlApi = "http://localhost:3333/v1";
+
 
 const http = axios.create({
   baseURL:urlApi

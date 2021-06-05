@@ -7,7 +7,7 @@ const Header = () => {
     <HeaderTag>
       <h1>( ͡° ͜ʖ ͡°) ADMIN</h1>
       <Nav>
-          <Link to="/">Home</Link>
+          <Link to="">Home</Link>
           <Link to="categories">Categorias</Link>
           <Link to="products">Produtos</Link>
           <Link to="suppliers">Fornecedores</Link>
