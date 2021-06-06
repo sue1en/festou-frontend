@@ -13,5 +13,5 @@ export default Footer;
 
 //estilos
 const FooterTag = styled.footer`
-  background-color:#cccccc;
+  background-color:${props => props.theme.secondary};
 `

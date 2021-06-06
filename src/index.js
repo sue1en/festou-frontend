@@ -4,12 +4,17 @@ import { Provider } from 'react-redux';
 import store from './store'
 import Routers from './routers';
 import ReduxToastr from './components/redux-toastr';
-
+import GlobalStyle from './config/globalStyled'
+import { ThemeProvider } from 'styled-components'
+import theme from './plugins/theme'
 
 ReactDOM.render(
   <Provider store={store}>
     <ReduxToastr/>
+    <ThemeProvider theme={theme}>
+    <GlobalStyle/>
     <Routers />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
   );

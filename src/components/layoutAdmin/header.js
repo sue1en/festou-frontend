@@ -1,19 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from '@reach/router'
+import { Link } from '@reach/router';
+
+import { makeStyles } from '@material-ui/core/styles'
+import { 
+  AppBar,
+  ToolBar,
+  IconButton,
+  MenuItem,
+  Menu,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Typography,
+} from '@material-ui/core'
+
 
 const Header = () => {
+  
   return(
     <HeaderTag>
-      <h1>( ͡° ͜ʖ ͡°) ADMIN</h1>
+      <NavLinkLogo to="/"><h1>( ͡° ͜ʖ ͡°)</h1></NavLinkLogo>
       <Nav>
-          <Link to="">Home</Link>
-          <Link to="categories">Categorias</Link>
-          <Link to="products">Produtos</Link>
-          <Link to="suppliers">Fornecedores</Link>
-          <Link to="clients">Clientes</Link>
-          <Link to="signin">Login</Link>
+        <NavLink to="categories"> Categorias</NavLink>
+        <NavLink to="products"> Produtos</NavLink>
+        <NavLink to="suppliers"> Fornecedores</NavLink>
+        <NavLink to="clients"> Clientes</NavLink>
       </Nav>
+      <NavLinkLogin to="signin"> Login</NavLinkLogin>
     </HeaderTag>
   )
 }
@@ -22,18 +36,37 @@ export default Header;
 
 //estilos
 const HeaderTag = styled.header`
-  background-color:#cccccc;
-  padding:20px;
+  background-color:${props => props.theme.main};
+  height:60px;
   display:flex;
+  justify-content: space-between;
+  align-items: center;
 `
+// const Logo = styled.div`
+//   padding:0 10px;
+
+// `
+const NavLinkLogo = styled(Link)`
+  padding:5px 0 5px 30px;
+  text-decoration: none;
+`
+
 const Nav = styled.nav`
-  ul{
-    display:flex;
-    text-decoration:none;
-    list-style:none;
-    padding:10px;
-    li{
-      padding:0 10px;
-    }
+  padding:5px 15px;
+`
+
+const NavLinkLogin = styled(Link)`
+  padding:5px 30px 5px 0;
+  text-decoration: none;
+  :hover{
+    background-color:${props => props.theme.secondary};
+  }
+`
+
+const NavLink = styled(Link)`
+  padding:0 10px;
+  text-decoration: none;
+  :hover{
+    background-color:${props => props.theme.secondary};
   }
 `
