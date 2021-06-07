@@ -3,9 +3,9 @@ import { create as CategoryAction } from '../../../store/categories/category.act
 import { useDispatch, useSelector } from 'react-redux'
 
 
-const TesteForm = ({submit}) => {
+const Form = ({submit}) => {
   const [ preview, setPreview ] = useState('')
-  const percent = useSelector((state) => state.categories.upload?.percent || 0)
+  // const percent = useSelector((state) => state.categories.upload?.percent || 0)
   const loading = false
 
   const [form, setForm ] = useState({
@@ -27,6 +27,7 @@ const TesteForm = ({submit}) => {
       ...form,
       status: form.status.toString()
     }
+    console.log(newForm)
     submit(newForm)
   };
 
@@ -58,8 +59,11 @@ const TesteForm = ({submit}) => {
       image
     })
   }
+
+  
+
   return (
-    <form>
+    <div>
       <label>
         Name
         <input type="text" name="name" id="name" value={form.name || ''} onChange={handleChange} />
@@ -95,69 +99,29 @@ const TesteForm = ({submit}) => {
       </label>
       <br/>
       <br/>
-      <input type="submit" value="enviar" onChange={handleSubmit}/>
-    </form>
+      <button type="button" onClick={handleSubmit}>Enviar</button>
+    </div>
   )
 }
 
 
 function Categories () {
   const dispatch = useDispatch();
-  const [modal, setModal] = React.useState({
-    status: false
-  })
+  // const [modal, setModal] = React.useState({
+  //   status: false
+  // })
 
   const handleSubmit = (form) => dispatch(CategoryAction(form))
 
-   return (
-    <div>
-      <h1>Categories Categories Categories</h1>
-      <br/>
-      <br/>
-      <TesteForm submit={handleSubmit}/>
-
-      {/* <form>
-        <label>
-          Name
-          <input type="text" name="name" id="name" value={form.name || ''} onChange={handleChange} />
-        </label>
-        <br/>
-        <br/>
-        <label>
-          Description
-          <input type="text" name="description" id="description" value={form.description || ''} onChange={handleChange} />
-        </label>
-        <br/>
-        <br/>
-        <label>
-          Status da categoria
-          <input type="checkbox" name="status" id="status" value={form.status} onChange={handleSwitch} />
-        </label>
-        <br/>
-        <br/>
-        <label>
-          Imagem da categoria
-          {preview.length > 0 
-            ? ( 
-                <div>
-                  <img src={preview}/>
-                  <button onClick={removeImage}>Remove</button>
-                </div>
-              ) : ( 
-                  <button onClick={removeImage}>
-                    <input accept="image/*" type="file" name="image" id="image" 
-                    onChange={previewImg} />
-                  </button>
-              )}
-        </label>
-        <br/>
-        <br/>
-        <input type="submit" value="enviar" onChange={handleSubmit}/>
-      </form> */}
-      <hr/>
-      <br/>
-      <br/>
-    </div>
-   )
+  return (
+  <div>
+    <h1>Categories Categories Categories</h1>
+    <br/>
+    <br/>
+    <Form submit={handleSubmit}/>
+    <br/>
+    <br/>
+  </div>
+  )
 }
 export default Categories

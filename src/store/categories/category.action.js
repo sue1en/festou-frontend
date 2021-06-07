@@ -23,12 +23,13 @@ export const create = (data) => {
     }
     try {
       const formData = new FormData()
-      Object.keys(data).map((k) => FormData.append(k, data[k]))
+      Object.keys(data).map((k) => formData.append(k, data[k]))
       const result = await createCategory(formData, config)
-      dispatch({ type: TYPES.PRODUCT_CREATE, data: result.data })
-      toastr.success("Category", "Successs! The new category has been registered.")
+      dispatch({ type: TYPES.CATEGORY_CREATE, data: result.data })
+      toastr.success("Category", "Success! The new category has been registered.")
     } catch (error) {
       toastr.error("Category", "Error! The new category wasn't registered" )
+      console.log(error)
     }
     console.log('disparar...', data)
   }
