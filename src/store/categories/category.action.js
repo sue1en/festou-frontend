@@ -1,8 +1,8 @@
 import TYPES from '../types'
-import { createCategory } from '../../services/categories.service'
+import { createCategorySvc, getAllCategorySvc } from '../../services/categories.service'
 import { toastr } from 'react-redux-toastr'
 
-export const create = (data) => {
+export const createCategoryAct = (data) => {
   return async (dispatch) => {
     const config = {
       headers: {
@@ -24,7 +24,7 @@ export const create = (data) => {
     try {
       const formData = new FormData()
       Object.keys(data).map((k) => formData.append(k, data[k]))
-      const result = await createCategory(formData, config)
+      const result = await createCategorySvc(formData, config)
       dispatch({ type: TYPES.CATEGORY_CREATE, data: result.data })
       toastr.success("Category", "Success! The new category has been registered.")
     } catch (error) {
@@ -32,5 +32,21 @@ export const create = (data) => {
       console.log(error)
     }
     console.log('disparar...', data)
+  }
+};
+
+
+export const getAllCategoryAct = () => {
+  return async (dispatch) => {
+    dispatch({type:TYPES.CATEGORY_LOADING, status:true})
+    try {
+      const all = await getAllCategorySvc()
+      dispatch({
+        type: TYPES.CATEGORY_ALL,
+        data: all.data
+      })
+    } catch (error){ 
+      toastr.error("temos um error", error)
+    }
   }
 };
