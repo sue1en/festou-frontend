@@ -24,7 +24,6 @@ const Form = ({submit}) => {
       ...form,
       status: form.status.toString()
     }
-    console.log(newForm)
     submit(newForm)
   };
 

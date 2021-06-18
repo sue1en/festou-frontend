@@ -29,6 +29,7 @@ function Suppliers () {
         <thead>
             <tr>
                 <th>ID</th>
+                <th>cnpj</th>
                 <th>Nome</th>
                 <th>imagem</th>
             </tr>
@@ -38,7 +39,7 @@ function Suppliers () {
                 <tr key={i}>
                     <th>{supplier.id}</th>
                     <td>{supplier.cnpj}</td>
-                    <td>{supplier.tradename}</td>
+                    <td>{supplier.tradeName}</td>
                     <td><img src={supplier.status}/></td>
                 </tr>
             ))}

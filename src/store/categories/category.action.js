@@ -1,5 +1,12 @@
 import TYPES from '../types'
-import { createCategorySvc, getAllCategorySvc } from '../../services/categories.service'
+import {
+  createCategorySvc,
+  getAllCategorySvc,
+  getByIdCategorySvc,
+  updateCategorySvc,
+  deactivateCategorySvc,
+  deleteCategorySvc,
+} from '../../services/categories.service'
 import { toastr } from 'react-redux-toastr'
 
 export const createCategoryAct = (data) => {
@@ -35,7 +42,6 @@ export const createCategoryAct = (data) => {
   }
 };
 
-
 export const getAllCategoryAct = () => {
   return async (dispatch) => {
     dispatch({type:TYPES.CATEGORY_LOADING, status:true})
@@ -50,3 +56,18 @@ export const getAllCategoryAct = () => {
     }
   }
 };
+
+export const getByIdCategoryAct = (categoryId) => {
+  return async (dispatch) => {
+    try {
+      // const { auth } = getState()
+      const res = await getByIdCategorySvc(categoryId);
+      dispatch ({
+        type: TYPES.CATEGORY_BY_ID,
+        data:res.data
+      })
+    } catch (error){
+        toastr.error("temos um error", error)
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getToken } from './storage';
 import store from '../store';
+import { signOut } from '../store/auth/auth.action'
 import storage from './storage'
 
 const urlApi = process.env.REACT_APP_API;
@@ -21,7 +22,7 @@ http.interceptors.response.use(
   (error) => {
     switch (error.response.status) {
       case 401:
-        store.dispatch(logoutAction())
+        store.dispatch(signOut())
         break
       default:
         break

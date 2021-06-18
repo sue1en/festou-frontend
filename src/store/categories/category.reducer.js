@@ -16,6 +16,10 @@ const reducer = ( state= INITIAL_STATE, action ) => {
       state.all = action.data
       state.loading = false
       return state
+    case TYPES.CATEGORY_BY_ID:
+      state.getById = action.data
+      state.loading = false
+      return state
     case TYPES.CATEGORY_CREATE:
       state.loading = false
       return state

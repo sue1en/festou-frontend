@@ -5,6 +5,7 @@ import Categories from './categories';
 import Products from './products';
 import Suppliers from './suppliers';
 import Clients from './clients';
+import CategoryDetail from './categories/categories.details'
 
 const Menu = [
   {
@@ -14,6 +15,14 @@ const Menu = [
     visubleMenu:true,
     enabled: true,
     component: Home
+  },
+  {
+    title: 'CategoryDetail',
+    icons: '',
+    route: '/categories/:id/*',
+    visubleMenu:true,
+    enabled: true,
+    component: CategoryDetail
   },
   {
     title: 'Categories',
