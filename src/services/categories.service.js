@@ -10,10 +10,10 @@ export const getByIdCategorySvc = (categoryId) => http.get(`${baseUrl}/${categor
 
 export const createCategorySvc = (data, config = {}) => http.post(baseUrl, data, config);
 
-export const updateCategorySvc = (id, data, config = {}) => http.put(`${baseUrl}/${id}`, data, config);
+export const updateCategorySvc = (categoryId, data, config = {}) => http.put(`${baseUrl}/${categoryId}`, data, config);
 
-export const activateCategorySvc = (id) => http.put(`${baseUrl}/${id}/ativa`);
+export const activateCategorySvc = (categoryId) => http.put(`${baseUrl}/${categoryId}/ativa`);
 
-export const deactivateCategorySvc = (id) => http.put(`${baseUrl}/${id}/inativa`);
+export const deactivateCategorySvc = (categoryId) => http.put(`${baseUrl}/${categoryId}/inativa`);
 
-export const deleteCategorySvc = (id) => http.delete(`${baseUrl}/${id}/delete`);
+export const deleteCategorySvc = (categoryId) => http.delete(`${baseUrl}/${categoryId}/delete`);

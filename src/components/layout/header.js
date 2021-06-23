@@ -1,72 +1,192 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from '@reach/router';
-
-import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components';
+import { fade, makeStyles } from '@material-ui/core/styles'
 import { 
   AppBar,
-  ToolBar,
+  Toolbar,
   IconButton,
+  Typography,
   MenuItem,
   Menu,
-  FormGroup,
-  FormControlLabel,
-  Switch,
-  Typography,
 } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import { isAuthenticated } from '../../config/auth';
+import { signOutAction } from '../../store/auth/auth.action';
+
+
+const useStyles = makeStyles((theme) => ({
+  grow: {
+    flexGrow: 1,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  title: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+}));
 
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   
+  const logout = () => {
+    dispatch(signOutAction())
+  };
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Dashboard</MenuItem>
+      <MenuItem onClick={logout}>Logout</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <Link to="products">Produtos</Link>
+      </MenuItem>
+      <MenuItem>
+        <Link to="aboutus">Sobre</Link>
+      </MenuItem>
+      <MenuItem>
+        <Link to="signin">Login</Link>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+
   return(
-    <HeaderTag>
-      <NavLinkLogo to="/"><h1>( ͡° ͜ʖ ͡°)</h1></NavLinkLogo>
-      <Nav>
-        <NavLink to="categories"> Categorias</NavLink>
-        <NavLink to="products"> Produtos</NavLink>
-        <NavLink to="suppliers"> Fornecedores</NavLink>
-        <NavLink to="clients"> Clientes</NavLink>
-      </Nav>
-      <NavLinkLogin to="signin"> Login</NavLinkLogin>
-    </HeaderTag>
+    <div className={classes.grow}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Typography className={classes.title} variant="h6" noWrap>
+            LOGO
+          </Typography>
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <MenuItem>
+              <Link to="products">Produtos</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="aboutus">Sobre</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="newclient">Cadastrar</Link>
+            </MenuItem>
+            {isAuthenticated() ?
+              (
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              ) : (
+                <MenuItem>
+                  <Link to="signin">Login</Link>
+                </MenuItem>
+              )}
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </div>
   )
 }
 
 export default Header;
 
 //estilos
-const HeaderTag = styled.header`
-  background-color:${props => props.theme.main};
+/* const HeaderTag = styled.header`
+   background-color:${props => props.theme.main};
   height:60px;
   display:flex;
   justify-content: space-between;
-  align-items: center;
-`
-// const Logo = styled.div`
-//   padding:0 10px;
-
-// `
-const NavLinkLogo = styled(Link)`
-  padding:5px 0 5px 30px;
-  text-decoration: none;
-`
-
-const Nav = styled.nav`
-  padding:5px 15px;
-`
-
-const NavLinkLogin = styled(Link)`
-  padding:5px 30px 5px 0;
-  text-decoration: none;
-  :hover{
-    background-color:${props => props.theme.secondary};
-  }
-`
-
-const NavLink = styled(Link)`
-  padding:0 10px;
-  text-decoration: none;
-  :hover{
-    background-color:${props => props.theme.secondary};
-  }
-`
+  align-items: center; 
+`*/

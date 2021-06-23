@@ -1,5 +1,5 @@
 import TYPES from '../types';
-import { getToken, getUser } from '../../config/storage';
+import { getToken, getUser } from '../../config/auth';
 
 const INITIAL_STATE = {
   loading: false,
@@ -17,7 +17,7 @@ const reducer = ( state = INITIAL_STATE, action) => {
       return state
     case TYPES.SIGN_IN:
       state.token = action.data.token
-      state.user = action.data.user
+      state.user = action.data.userDTO
       state.loading = false
       return state
     case TYPES.SIGN_UP:

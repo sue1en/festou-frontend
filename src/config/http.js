@@ -1,33 +1,31 @@
 import axios from 'axios';
-import { getToken } from './storage';
+import { getToken } from './auth';
 import store from '../store';
-import { signOut } from '../store/auth/auth.action'
-import storage from './storage'
+import { signOutAction } from '../store/auth/auth.action'
 
-const urlApi = process.env.REACT_APP_API;
+const urlApi = process.env.REACT_APP_API + '/v1';
 // const urlApi = "http://localhost:3333/v1";
-
 
 const http = axios.create({
   baseURL:urlApi
-})
+});
 
 http.defaults.headers['content-type'] = 'application/json'
 if (getToken()) {
-  http.defaults.headers.token = getToken()
-}
+  http.defaults.headers['token'] = getToken()
+};
 
 http.interceptors.response.use(
   (response) => response,
   (error) => {
     switch (error.response.status) {
       case 401:
-        store.dispatch(signOut())
+        store.dispatch(signOutAction())
         break
       default:
         break
     }
   }
-)
+);
 
 export default http;

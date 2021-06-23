@@ -16,14 +16,18 @@ const reducer = ( state = INITIAL_STATE, action) => {
       state.all = action.data
       state.loading = false
       return state
+    case TYPES.SUPPLIER_BY_ID:
+      state.getById = action.data
+      state.loading = false
+      return state
     case TYPES.SUPPLIER_CREATE:
       state.loading = false
       return state
+      case TYPES.SUPPLIER_EDIT:
+        state.selected = action.data
+        return state
     case TYPES.SUPPLIER_UPLOAD:
       state.upload = action.upload
-      return state
-    case TYPES.SUPPLIER_EDIT:
-      state.selected = action.data
       return state
     default:
       return state

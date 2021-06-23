@@ -1,5 +1,5 @@
 import { Router } from '@reach/router';
-import LayoutAdmin from '../../components/layoutAdmin'
+import PainelLayout from '../../components/layout/painel-layout.js'
 import Home from './home';
 import Categories from './categories';
 import Products from './products';
@@ -61,11 +61,11 @@ const Admin = (props) => {
   return(
     <>
       <Router>
-        <LayoutAdmin path='/'>
+        <PainelLayout path='/'>
           {Menu.map(({component: Component, route}, i) => (
             <Component key={i} path={route}/>
           ))}
-        </LayoutAdmin>
+        </PainelLayout>
       </Router>
     </>
   )

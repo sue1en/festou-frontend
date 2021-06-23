@@ -1,4 +1,4 @@
-import { removeToken, saveAuth } from '../../config/storage'
+import { removeToken, saveAuth } from '../../config/auth'
 import { authService } from '../../services/auth.service';
 import http from '../../config/http';
 import TYPES from '../types';
@@ -14,6 +14,7 @@ export const signInAction = (data) => {
         saveAuth(result.data?.data)
         http.defaults.headers.token = result.data.data.token     
       }
+      console.log("###" + http.defaults.headers.token)
       dispatch({
         type: TYPES.SIGN_IN,
         data: result.data?.data
@@ -25,9 +26,10 @@ export const signInAction = (data) => {
   }
 };
 
-export const signOut = (data) => {
+export const signOutAction = (data) => {
   return async (dispatch) => {
     removeToken();
     dispatch({ type: TYPES.SIGN_OUT })
+    navigate('/signin')
   }
 }

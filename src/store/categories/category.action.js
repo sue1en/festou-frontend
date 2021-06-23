@@ -9,6 +9,38 @@ import {
 } from '../../services/categories.service'
 import { toastr } from 'react-redux-toastr'
 
+//TODO: setStatus e remove
+
+export const getAllCategoryAct = () => {
+  return async (dispatch) => {
+    dispatch({type:TYPES.CATEGORY_LOADING, status:true})
+    try {
+      const all = await getAllCategorySvc()
+      dispatch({
+        type: TYPES.CATEGORY_ALL,
+        data: all.data
+      })
+    } catch (error){ 
+      toastr.error("temos um error", error)
+    }
+  }
+};
+
+export const getByIdCategoryAct = (categoryId) => {
+  return async (dispatch) => {
+    try {
+      // const { auth } = getState()
+      const res = await getByIdCategorySvc(categoryId);
+      dispatch ({
+        type: TYPES.CATEGORY_BY_ID,
+        data:res.data
+      })
+    } catch (error){
+        toastr.error("temos um error", error)
+    }
+  }
+};
+
 export const createCategoryAct = (data) => {
   return async (dispatch) => {
     const config = {
@@ -42,32 +74,72 @@ export const createCategoryAct = (data) => {
   }
 };
 
-export const getAllCategoryAct = () => {
+
+export const editCategoryAct = (categoryId) => {
   return async (dispatch) => {
-    dispatch({type:TYPES.CATEGORY_LOADING, status:true})
+    dispatch({
+      type: TYPES.CATEGORY_UPLOAD,
+      upload: 0
+    })
     try {
-      const all = await getAllCategorySvc()
-      dispatch({
-        type: TYPES.CATEGORY_ALL,
-        data: all.data
-      })
-    } catch (error){ 
-      toastr.error("temos um error", error)
+      const result = await getByIdCategorySvc(categoryId)
+      dispatch({ type: TYPES.CATEGORY_EDIT, data: result.data })
+    } catch (error) {
+      toastr.error('temos um erro', error)
     }
   }
-};
+}
 
-export const getByIdCategoryAct = (categoryId) => {
-  return async (dispatch) => {
-    try {
-      // const { auth } = getState()
-      const res = await getByIdCategorySvc(categoryId);
-      dispatch ({
-        type: TYPES.CATEGORY_BY_ID,
-        data:res.data
+
+export const updateCategoryAct = ({ categoryId, ...data }) => {
+  return (dispatch) => {
+    dispatch({ type: TYPES.CATEGORY_LOADING, status: true })
+    dispatch({
+      type: TYPES.CATEGORY_UPLOAD,
+      upload: 0
+    });
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      onUploadProgress: function (progressEvent) {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        )
+        console.log('percentCompleted', percentCompleted)
+
+        dispatch({
+          type: TYPES.CATEGORY_UPLOAD,
+          upload: percentCompleted
+        })
+      }
+    };
+    const formData = new FormData()
+    Object.keys(data).map((k) => formData.append(k, data[k]))
+    updateCategorySvc(categoryId, formData, config)
+      .then((result) => {
+        dispatch(editCategoryAct(categoryId))
+        dispatch(getAllCategoryAct())
+        toastr.success('Category', 'Categoria atualizada com sucesso')
+        dispatch({ type: TYPES.CATEGORY_UPDATE })
       })
+      .catch((error) => {
+        dispatch({ type: TYPES.SIGN_ERROR, data: error })
+        toastr.error('Category', error.toString())
+      })
+  }
+}
+
+export const deleteCategoryAct = (categoryId) => {
+  return async (dispatch) => {
+    try{
+      const result = await deleteCategorySvc(categoryId)
+      dispatch({ type: TYPES.CATEGORY_EDIT, data: result.data })
+      toastr.success('Category', 'Removido com sucesso')
+      dispatch(getAllCategoryAct())
     } catch (error){
-        toastr.error("temos um error", error)
+      toastr.error('aconteceu um erro', error)
+      toastr.error('Category', error.toString())
     }
   }
 }

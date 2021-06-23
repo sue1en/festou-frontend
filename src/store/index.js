@@ -7,12 +7,16 @@ import { reducer as toastrReducer } from 'react-redux-toastr';
 import SignReducer from './auth/auth.reducer'
 import CategoryReducer from './categories/category.reducer'
 import SupplierReducer from './supplier/supplier.reducer'
+import ProductReducer from './products/products.reducer'
+import ClientReducer from './clients/clients.reducer'
 
 const reducers = combineReducers({
   auth: SignReducer,
   toastr: toastrReducer,
   categories: CategoryReducer,
   suppliers: SupplierReducer,
+  products: ProductReducer,
+  clients: ClientReducer,
 })
 
 const middleware = [thunk, multi]

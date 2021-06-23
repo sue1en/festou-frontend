@@ -2,8 +2,9 @@ import TYPES from '../types'
 
 const INITIAL_STATE = {
   loading: false,
-  error: [],
-  upload: {}
+  all: [],
+  upload: {},
+  selected: {}
 }
 
 const reducer = ( state= INITIAL_STATE, action ) => {
@@ -21,6 +22,10 @@ const reducer = ( state= INITIAL_STATE, action ) => {
       state.loading = false
       return state
     case TYPES.CATEGORY_CREATE:
+      state.loading = false
+      return state
+    case TYPES.CATEGORY_EDIT:
+      state.selected = action.data
       state.loading = false
       return state
     case TYPES.CATEGORY_UPLOAD:

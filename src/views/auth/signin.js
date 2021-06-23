@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signInAction } from '../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { Router } from '@reach/router';
 import Layout from '../../components/layout'
+import { Container, Paper } from '@material-ui/core';
 
-
-export default function SignIn () {
+const SignIn = () => {
   const dispatch = useDispatch()
   const [form, setForm] = useState({
-    email:'suelen@email.com',
-    password:'123456'
+    email:'',
+    password:''
   });
   
   const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector(state => state.auth.error);
+
+  // const [visible, setVisible] = useState(true);
+  // const onDismiss = () => setVisible(false);
+
+  // const closeError = () => setVisible(false);
 
   const handleChange = (props) => {
     const { value, name } = props.target
@@ -22,14 +28,21 @@ export default function SignIn () {
     })
   };
 
-  const submitForm = () => {
+  const submitForm = (e) => {
+    e.preventDefault()
     dispatch(signInAction(form))
   };
 
+  // useEffect(()=> {
+  //   setVisible(error.length > 0)
+  //   setTimeout(() => setVisible(false), 5000);
+  // }, [error])
+
+
   return(
-    <>
-      <Layout path='/'>
-        <h1>Login</h1>
+    <Container >
+      <Paper>
+        <h1> SignIn</h1>
         <form>
           <label htmlFor='email'>
             Email:
@@ -39,9 +52,11 @@ export default function SignIn () {
             Senha:
             <input type='text' id='password' name='password' value={form.password || ''} onChange={handleChange}/>
           </label>
-          <button onChange={submitForm}>Entrar</button>
+          <button onClick={(e) => submitForm(e)}>Entrar</button>
         </form>
-      </Layout>
-    </>
+      </Paper>
+    </Container>
   )
 };
+
+export default SignIn

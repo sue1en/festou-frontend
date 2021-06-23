@@ -1,6 +1,6 @@
 const theme = {
-  main:"#fbb901",
-  secondary:"#774898"
+  main:"#eeeeee",
+  secondary:"#eeeeee"
 }
 
 export default theme

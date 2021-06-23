@@ -13,8 +13,8 @@ ReactDOM.render(
   <Provider store={store}>
     <ReduxToastr/>
     <ThemeProvider theme={theme}>
-    <GlobalStyle/>
-    <Routers />
+      <GlobalStyle/>
+      <Routers/>
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')

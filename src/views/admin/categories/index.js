@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { createCategoryAct, getAllCategoryAct } from '../../../store/categories/category.action';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components'
 //COMPONENTS
 import AllCategoriesList from '../../../components/admin/categories/categories.list'
 import Form from '../../../components/admin/categories/categories.form'
@@ -14,20 +15,26 @@ function Categories () {
   const handleSubmit = (form) => dispatch(createCategoryAct(form))
   
   return (
-    <div>
-      <h1>Categories Categories Categories</h1>
-      <br/>
+    <CategoryBody>
+      <h1>Categories</h1>
       <br/>
       <hr/>
       <br/>
       <AllCategoriesList/>
       <br/>
       <br/>
-      <Form submit={handleSubmit}/>
+      {/* <Form submit={handleSubmit}/> */}
       <br/>
       <br/>
-    </div>
+    </CategoryBody>
   )
 };
 
 export default Categories;
+
+const CategoryBody = styled.div`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`

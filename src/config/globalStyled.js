@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding:0;
     outline:0;
+    /* background-color:#F5F5F5; */
   }
 
   #root{
