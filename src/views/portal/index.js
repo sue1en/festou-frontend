@@ -4,7 +4,7 @@ import Home from './home';
 import Category from './categories';
 import Products from './products';
 import Suppliers from './suppliers';
-import Clients from './clients';
+import NewClient from './clients/newClient';
 
 const Menu = [
   {
@@ -48,15 +48,14 @@ const Menu = [
     component: Suppliers
   },
   {
-    title: 'Clients',
+    title: 'NewClient',
     icons: '',
-    route: '/clients',
+    route: '/newclient',
     visubleMenu:true,
     enabled: true,
-    component: Clients
+    component: NewClient
   },
 ]
-
 
 const Portal = (props) => {
   return(

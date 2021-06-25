@@ -3,9 +3,49 @@ import { signInAction } from '../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { Router } from '@reach/router';
 import Layout from '../../components/layout'
-import { Container, Paper } from '@material-ui/core';
+import {  } from '@material-ui/core'
+import {
+  makeStyles,
+  Container,
+  Paper,
+  TextField,
+  InputAdornment,
+} from '@material-ui/core';
+import EmailIcon from '@material-ui/icons/Email';
+import LockIcon from '@material-ui/icons/Lock';
+
+
+const useStyles = makeStyles((theme) => ({
+  root:{
+    flexGrow:1,
+    height: '100vh',
+    display: 'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  signBox:{
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    minWidth: 300,
+    maxWidth: 450,
+    padding: 16,
+    margin: 16,
+  },
+  formRoot: {
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    '& > *':{
+      margin:theme.spacing(2),
+      width: '35ch'
+    },
+  },
+}))
+
 
 const SignIn = () => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const [form, setForm] = useState({
     email:'',
@@ -40,22 +80,43 @@ const SignIn = () => {
 
 
   return(
-    <Container >
-      <Paper>
+    <div className={classes.root}>
+      <Paper className={classes.signBox}>
         <h1> SignIn</h1>
-        <form>
-          <label htmlFor='email'>
-            Email:
-            <input type='text' id='email' name='email' value={form.email || ''} onChange={handleChange}/>
-          </label>
-          <label htmlFor='password'>
-            Senha:
-            <input type='text' id='password' name='password' value={form.password || ''} onChange={handleChange}/>
-          </label>
+        <form className={classes.formRoot}>
+          <TextField
+            id='email'
+            name='email'
+            label='email'
+            value={form.email || ''}
+            onChange={handleChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <EmailIcon/>
+                </InputAdornment>
+              ),
+            }}
+          />    
+          <TextField
+            id='password'
+            name='password'
+            label='pasword' 
+            value={form.password || ''}
+            onChange={handleChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <LockIcon/>
+                </InputAdornment>
+              ),
+            }}
+            // fullWidth={true}
+          />
           <button onClick={(e) => submitForm(e)}>Entrar</button>
         </form>
       </Paper>
-    </Container>
+    </div>
   )
 };
 

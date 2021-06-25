@@ -14,7 +14,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { DashboardItens } from './panel-itens'
+import { DashboardItens } from './painelItens'
 
 
 const drawerWidth = 240;
@@ -57,7 +57,7 @@ const classes = useStyles();
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-        <List>{ DashboardItens }</List>
+        <List><DashboardItens/></List>
         </div>
       </Drawer>
       <main className={classes.content}>

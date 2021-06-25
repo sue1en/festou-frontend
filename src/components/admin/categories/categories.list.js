@@ -112,7 +112,7 @@ const AllCategoriesList = () => {
             <StyledTableRow>
                 <StyledTableCell>Imagem</StyledTableCell>
                 <StyledTableCell>Nome</StyledTableCell>
-                <StyledTableCell>ID</StyledTableCell>
+                {/* <StyledTableCell>ID</StyledTableCell> */}
                 <StyledTableCell>Status</StyledTableCell>
                 <StyledTableCell>Editar</StyledTableCell>
                 <StyledTableCell>Excluir</StyledTableCell>
@@ -129,8 +129,9 @@ const AllCategoriesList = () => {
                   )}
                 </StyledTableCell>
                 <StyledTableCell>{category.name}</StyledTableCell>
-                <StyledTableCell>{category.id}</StyledTableCell>
-                <StyledTableCell>{category.status}</StyledTableCell>
+                {/* <StyledTableCell>{category.id}</StyledTableCell> */}
+                <StyledTableCell>
+                  {category.status ? 'ativo' : 'inativo'}</StyledTableCell>
                 <StyledTableCell>
                   <IconButton onClick={() => openModal(2, null)}>
                     <EditIcon/>

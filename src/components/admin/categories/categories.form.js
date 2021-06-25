@@ -18,7 +18,10 @@ const Form = ({submit}) => {
     })
   };
 
-  const handleSwitch = () => setForm({ ...form, status: !form.status });
+  const handleSwitch = () => setForm({
+    ...form, status: !form.status
+  });
+
   const handleSubmit = () => {
     const newForm = {
       ...form,

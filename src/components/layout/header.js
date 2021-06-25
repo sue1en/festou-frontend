@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from '@reach/router';
+import { Link as LinkRoute } from '@reach/router';
 import styled from 'styled-components';
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { 
@@ -10,11 +10,17 @@ import {
   Typography,
   MenuItem,
   Menu,
+  Avatar,
+  Link,
 } from '@material-ui/core'
+//icons
 import MenuIcon from '@material-ui/icons/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle';
+//itern import
 import { isAuthenticated } from '../../config/auth';
 import { signOutAction } from '../../store/auth/auth.action';
+//image
+import HeaderLogo from '../../assets/logo/FestouHeaderLogo.svg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor:'#000000',
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
+      display: 'flex',
     },
   },
   sectionDesktop: {
@@ -50,98 +57,117 @@ const Header = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  
+
   const logout = () => {
     dispatch(signOutAction())
   };
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
+  
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
   };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Dashboard</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link component={LinkRoute} color="inherit" noWrap to="admin">
+          Dashboard
+        </Link>
+      </MenuItem>
       <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Link to="products">Produtos</Link>
+        <Link component={LinkRoute} color="inherit" noWrap to="products">
+          Produtos
+        </Link>
       </MenuItem>
       <MenuItem>
-        <Link to="aboutus">Sobre</Link>
+        <Link component={LinkRoute} color="inherit" noWrap to="aboutus">
+          Sobre nós
+        </Link>
       </MenuItem>
-      <MenuItem>
-        <Link to="signin">Login</Link>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      {isAuthenticated() ? 
+        (
+          <div>
+            <MenuItem>
+              <Link component={LinkRoute} color="inherit" noWrap to="admin">
+                Dashboard
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={logout}>
+              Logout
+            </MenuItem>
+          </div>
+        ) : (
+          <div>
+            <MenuItem>
+              <Link component={LinkRoute} color="inherit" noWrap to="newclient"> 
+                Cadastrar
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link component={LinkRoute} color="inherit" noWrap to="signin"> 
+                Login
+              </Link>
+            </MenuItem>
+          </div>
+        )}
     </Menu>
   );
 
   return(
     <div className={classes.grow}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar className={classes.appBar}>
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            LOGO
-          </Typography>
+          <Link  component={LinkRoute} color="inherit" noWrap to="/">
+            <Typography className={classes.title} variant="h5" noWrap>
+              <Avatar src={HeaderLogo} alt='logo'/>
+                festou
+            </Typography>
+          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <MenuItem>
-              <Link to="products">Produtos</Link>
+              <Link component={LinkRoute} color="inherit" noWrap to="products"> 
+                Produtos
+              </Link>
             </MenuItem>
             <MenuItem>
-              <Link to="aboutus">Sobre</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="newclient">Cadastrar</Link>
+              <Link component={LinkRoute} color="inherit" noWrap to="aboutus"> 
+                Sobre
+              </Link>
             </MenuItem>
             {isAuthenticated() ?
               (
@@ -156,19 +182,22 @@ const Header = () => {
                   <AccountCircle />
                 </IconButton>
               ) : (
-                <MenuItem>
-                  <Link to="signin">Login</Link>
-                </MenuItem>
-              )}
+                <div className={classes.sectionDesktop}>
+                  <MenuItem>
+                    <Link component={LinkRoute} color="inherit" noWrap to="newclient">
+                      Cadastrar
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link component={LinkRoute} color="inherit" noWrap to="signin">
+                      Login
+                    </Link>
+                  </MenuItem>
+                </div>
+            )}
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
+            <IconButton aria-label="show more" aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
               <MenuIcon />
             </IconButton>
           </div>
@@ -185,8 +214,4 @@ export default Header;
 //estilos
 /* const HeaderTag = styled.header`
    background-color:${props => props.theme.main};
-  height:60px;
-  display:flex;
-  justify-content: space-between;
-  align-items: center; 
 `*/
