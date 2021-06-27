@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     flexgrow:5,
     '& > *':{
       margin: theme.spacing(0),
-      width: theme.spacing('100vw'),
-      height: theme.spacing('auto'),
+      // width: theme.spacing('100vw'),
+      // height: theme.spacing('auto'),
       padding:theme.spacing(10),
     },
 

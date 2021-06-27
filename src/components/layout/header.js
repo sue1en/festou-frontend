@@ -28,8 +28,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    // zIndex: theme.zIndex.drawer + 1,
     backgroundColor:'#000000',
+    position: 'absolute',
+    top: 0,
+    // width: theme.spacing('100vw'),
   },
   title: {
     display: 'none',
@@ -133,6 +136,11 @@ const Header = () => {
         ) : (
           <div>
             <MenuItem>
+              <Link component={LinkRoute} color="inherit" noWrap to="newsupplier"> 
+                Seja Parceiro
+              </Link>
+            </MenuItem>
+            <MenuItem>
               <Link component={LinkRoute} color="inherit" noWrap to="newclient"> 
                 Cadastrar
               </Link>
@@ -183,6 +191,11 @@ const Header = () => {
                 </IconButton>
               ) : (
                 <div className={classes.sectionDesktop}>
+                  <MenuItem>
+                    <Link component={LinkRoute} color="inherit" noWrap to="newsupplier"> 
+                      Seja Parceiro
+                    </Link>
+                  </MenuItem>
                   <MenuItem>
                     <Link component={LinkRoute} color="inherit" noWrap to="newclient">
                       Cadastrar

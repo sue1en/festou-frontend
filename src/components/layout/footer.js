@@ -1,18 +1,28 @@
 import React from 'react';
-import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
+import {footerStyle} from './layoutStyle.js'
+
+
+const useStyles = makeStyles(footerStyle)
 
 const Footer = () => {
+  const classes = useStyles()
+
   return(
-    <FooterTag>
+    <footer className={classes.root}>
       <p>Footer aqui!</p>
-    </FooterTag>
+    </footer>
   )
 }
 
 export default Footer;
 
 //estilos
-const FooterTag = styled.footer`
-  background-color:${props => props.theme.secondary};
-  /* height:40px; */
-`
+// const FooterTag = styled.footer`
+//   background-color:${props => props.theme.secondary};
+//     position: relative;
+//     bottom: 0;
+//     width: 100vw;
+//     height: 50px;
+//   /* height:40px; */
+// `

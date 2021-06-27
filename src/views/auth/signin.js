@@ -1,48 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { signInAction } from '../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { Router } from '@reach/router';
+import { Link } from '@reach/router';
 import Layout from '../../components/layout'
 import {  } from '@material-ui/core'
 import {
   makeStyles,
-  Container,
+  Box,
+  Grid,
   Paper,
+  Button,
+  Container,
   TextField,
   InputAdornment,
 } from '@material-ui/core';
+import styles from './userForm.style.js'
+//Icons
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 
-
-const useStyles = makeStyles((theme) => ({
-  root:{
-    flexGrow:1,
-    height: '100vh',
-    display: 'flex',
-    alignItems:'center',
-    justifyContent:'center',
-  },
-  signBox:{
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    minWidth: 300,
-    maxWidth: 450,
-    padding: 16,
-    margin: 16,
-  },
-  formRoot: {
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    '& > *':{
-      margin:theme.spacing(2),
-      width: '35ch'
-    },
-  },
-}))
-
+const useStyles = makeStyles(styles)
 
 const SignIn = () => {
   const classes = useStyles()
@@ -80,16 +57,20 @@ const SignIn = () => {
 
 
   return(
-    <div className={classes.root}>
-      <Paper className={classes.signBox}>
+    <Box className={classes.root}>
+      <Box className={classes.mainBox}>
         <h1> SignIn</h1>
-        <form className={classes.formRoot}>
+        <form className={classes.formStyled}>
           <TextField
             id='email'
             name='email'
             label='email'
             value={form.email || ''}
             onChange={handleChange}
+            variant="outlined"
+            required
+            fullWidth
+            className={classes.textFieldStyle}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
@@ -104,6 +85,10 @@ const SignIn = () => {
             label='pasword' 
             value={form.password || ''}
             onChange={handleChange}
+            variant="outlined"
+            required
+            fullWidth
+            className={classes.textFieldStyle}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
@@ -113,10 +98,27 @@ const SignIn = () => {
             }}
             // fullWidth={true}
           />
-          <button onClick={(e) => submitForm(e)}>Entrar</button>
+          <Button
+            onClick={(e) => submitForm(e)}
+            fullWidth
+            size='large'
+            type='button'
+            variant="contained"
+            className={classes.styledButton}
+          >
+            Entrar
+          </Button>
+          <Grid container>
+            <Grid item>
+              Já é cadastrado?
+              <Link to='/signin' variant='body2'>
+                &ensp;Faça seu Login
+              </Link>
+            </Grid>
+          </Grid>
         </form>
-      </Paper>
-    </div>
+      </Box>
+    </Box>
   )
 };
 

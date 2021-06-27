@@ -4,7 +4,8 @@ import Home from './home';
 import Category from './categories';
 import Products from './products';
 import Suppliers from './suppliers';
-import NewClient from './clients/newClient';
+import NewClient from '../auth/newClient';
+import NewSupplier from '../auth/newSupplier';
 
 const Menu = [
   {
@@ -54,6 +55,14 @@ const Menu = [
     visubleMenu:true,
     enabled: true,
     component: NewClient
+  },
+  {
+    title: 'NewSupplier',
+    icons: '',
+    route: '/newsupplier',
+    visubleMenu:true,
+    enabled: true,
+    component: NewSupplier
   },
 ]
 
