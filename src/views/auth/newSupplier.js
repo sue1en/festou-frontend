@@ -76,7 +76,7 @@ const NewSupplier = () => {
   };
 
   const submitForm = () => {
-    const newForm = {...form, phoneNumber: parseInt(form.phoneNumber.replace(/[(,),' ',-]/g,''))}
+    const newForm = {...form, cnpj: parseInt(form.cnpj.replace(/[.,.,/,-]/g,'')), phoneNumber: parseInt(form.phoneNumber.replace(/[(,),' ',-]/g,''))}
     dispatch(createSupplierAct(newForm))
   };
 
@@ -118,7 +118,7 @@ const NewSupplier = () => {
               }} 
             />
              <InputMask
-              mask="(99) 99999-9999"
+              mask="99.999.999/9999-99"
               disabled={false}
               maskChar=''
               value={form.cnpj || ''}

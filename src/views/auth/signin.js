@@ -82,7 +82,8 @@ const SignIn = () => {
           <TextField
             id='password'
             name='password'
-            label='pasword' 
+            label='pasword'
+            type='password'
             value={form.password || ''}
             onChange={handleChange}
             variant="outlined"

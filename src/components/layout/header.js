@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link as LinkRoute } from '@reach/router';
-import styled from 'styled-components';
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { 
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  MenuItem,
+  Link,
   Menu,
   Avatar,
-  Link,
+  AppBar,
+  Toolbar,
+  MenuItem,
+  IconButton,
+  Typography,
 } from '@material-ui/core'
 //icons
 import MenuIcon from '@material-ui/icons/Menu'
@@ -19,81 +18,50 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 //itern import
 import { isAuthenticated } from '../../config/auth';
 import { signOutAction } from '../../store/auth/auth.action';
+//style
+import { headerStyle } from './layoutStyle'
 //image
-import HeaderLogo from '../../assets/logo/FestouHeaderLogo.svg'
+import HeaderLogo from '../../assets/images/logo/FestouHeaderLogo.svg'
 
-
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  appBar: {
-    // zIndex: theme.zIndex.drawer + 1,
-    backgroundColor:'#000000',
-    position: 'absolute',
-    top: 0,
-    // width: theme.spacing('100vw'),
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-}));
-
+const useStyles = makeStyles(headerStyle)
 
 const Header = () => {
   const dispatch = useDispatch()
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [profileAnchorEl, setProfileAnchorEl] = useState(null);
+  const [mobileAnchorEl, setMobileAnchorEl] = useState(null);
 
   const logout = () => {
     dispatch(signOutAction())
   };
 
-  const isMenuOpen = Boolean(anchorEl);
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setProfileAnchorEl(event.currentTarget);
   };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleProfileMenuClose = () => {
+    setProfileAnchorEl(null);
     handleMobileMenuClose();
   };
   
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+    setMobileAnchorEl(event.currentTarget);
   };
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+    setMobileAnchorEl(null);
   };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorEl={profileAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
+      open={Boolean(profileAnchorEl)}
+      onClose={handleProfileMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleProfileMenuClose}>
         <Link component={LinkRoute} color="inherit" noWrap to="admin">
           Dashboard
         </Link>
@@ -102,13 +70,15 @@ const Header = () => {
     </Menu>
   );
 
+  const menuMobile = 'customized-profile-menu';
   const renderMobileMenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorEl={mobileAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuMobile}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
+      open={Boolean(mobileAnchorEl)}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
@@ -159,7 +129,7 @@ const Header = () => {
     <div className={classes.grow}>
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Link  component={LinkRoute} color="inherit" noWrap to="/">
+          <Link component={LinkRoute} color="inherit" noWrap to="/">
             <Typography className={classes.title} variant="h5" noWrap>
               <Avatar src={HeaderLogo} alt='logo'/>
                 festou
