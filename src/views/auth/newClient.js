@@ -3,17 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from '@reach/router'
 import { createClientAct } from '../../store/clients/clients.action';
 import StatesAndCities from '../../util/states-cities.json'
-//estilos
 import {
-  makeStyles, 
-  TextField,
-  InputAdornment,
+  Box,
   Grid,
-  FormControl,
   Select,
   Button,
-  Box,
   Container,
+  TextField,
+  FormControl,
+  InputAdornment,
+  makeStyles, 
 } from '@material-ui/core'
 import InputMask from 'react-input-mask'
 //Icons
@@ -26,7 +25,8 @@ import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
-import styles from './userForm.style.js'
+//estilos
+import styles from '../../assets/styles/userForm.style'
 
 const useStyles = makeStyles(styles)
 

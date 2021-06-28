@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { signInAction } from '../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from '@reach/router';
-import Layout from '../../components/layout'
 import {  } from '@material-ui/core'
 import {
   makeStyles,
@@ -14,7 +12,9 @@ import {
   TextField,
   InputAdornment,
 } from '@material-ui/core';
-import styles from './userForm.style.js'
+import { signInAction } from '../../store/auth/auth.action'
+import Layout from '../../components/layout'
+import styles from '../../assets/styles/userForm.style'
 //Icons
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';

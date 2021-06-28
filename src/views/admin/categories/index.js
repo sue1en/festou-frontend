@@ -1,31 +1,82 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { createCategoryAct, getAllCategoryAct } from '../../../store/categories/category.action';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  Grid,
+  CssBaseline,
+  Button 
+} from '@material-ui/core';
+import {
+  getAllCategoryAct,
+  createCategoryAct,
+  editCategoryAct,
+  updateCategoryAct,
+  deleteCategoryAct,
+} from '../../../store/categories/category.action';
 import styled from 'styled-components'
 //COMPONENTS
-import AllCategoriesList from '../../../components/admin/categories/categories.list'
+import CategoryList from '../../../components/admin/categories/category.table'
 import Form from '../../../components/admin/categories/categories.form'
+import Remove from '../../../components/admin/categories/category.remove';
+import DialogModal from '../../../components/dialog';
 
 function Categories () {
   const dispatch = useDispatch();
-  // // const [modal, setModal] = React.useState({
-  //   //   status: false
-  //   // })
+  const [modal, setModal] = useState({})
 
-  const handleSubmit = (form) => dispatch(createCategoryAct(form))
+  const category = useSelector(state => state.categories.all?.data);
+  // console.log(category)
+  const loading = useSelector(state => state.categories.loading);
+  const selected = useSelector(state => state.categories.selected);
+
+  const callCategory = useCallback(() => {
+    dispatch(getAllCategoryAct())
+    }, [dispatch]);
+
+  useEffect(() => {
+    callCategory();
+  }, [callCategory]);
+
+  const closeModal = () => setModal({ status: false })
+  const openModal = (type = 1, id = null) => {
+    if(id){
+      dispatch(editCategoryAct(id)).then(() => 
+        setModal({type, id, status:true})
+      )
+    } else {
+      setModal({type, id, status: true})
+    }
+  }
+
+  const submitForm = (form) => {
+    switch (modal.type){
+      case 1:
+        dispatch(createCategoryAct(form))
+        return
+      case 2:
+        dispatch(updateCategoryAct(form))
+        return
+      case 3:
+        dispatch(deleteCategoryAct(modal.id)).then(() => setModal(false))
+        return
+      default:
+        return false
+    }
+  }
   
   return (
     <CategoryBody>
-      <h1>Categories</h1>
-      <br/>
-      <hr/>
-      <br/>
-      <AllCategoriesList/>
-      <br/>
-      <br/>
-      {/* <Form submit={handleSubmit}/> */}
-      <br/>
-      <br/>
+      <div>
+        <div>
+          <CategoryList data={category} loading={loading} modal={openModal}/>
+        </div>
+        <DialogModal open={modal.status || false} close={closeModal}>
+          <div>
+            {modal.type === 1 ? <Form submit={submitForm}/> : null}
+            {modal.type === 2 ? (<Form submit={submitForm} data={selected}/>) : null}
+            {modal.type === 3 ? (<Remove close={closeModal} remove={submitForm}/>) : null}
+          </div>
+        </DialogModal>
+      </div>
     </CategoryBody>
   )
 };

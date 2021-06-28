@@ -15,4 +15,4 @@ export const updateProductSvc = (supplierId, productId, data, config = {}) => ht
 
 // export const deactivateProductSvc = (supplierId, productId) => http.put(`${baseUrl}/${supplierId}/products${productId}/inativa`);
 
-// export const deleteProductSvc = (supplierId, productId) => http.delete(`${baseUrl}/${supplierId}/products${productId}/delete`);
+export const deleteProductSvc = (supplierId, productId) => http.delete(`${baseUrl}/${supplierId}/products${productId}/delete`);

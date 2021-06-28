@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from '@reach/router'
 import { createSupplierAct } from '../../store/supplier/supplier.action';
 import StatesAndCities from '../../util/states-cities.json'
-//estilos
 import {
   makeStyles, 
   TextField,
@@ -30,7 +29,8 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
-import styles from './userForm.style.js'
+//estilos
+import styles from '../../assets/styles/userForm.style'
 
 const useStyles = makeStyles(styles)
 
