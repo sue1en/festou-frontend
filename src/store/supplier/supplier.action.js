@@ -32,7 +32,8 @@ export const getByIdSupplierAct = (supplierId) => {
   return async (dispatch) => {
     try{
       const res = await getByIdSupplierSvc(supplierId);
-      dispatch({type: TYPES.SUPPLIER_BY_ID, data: res.data })
+      console.log("#####____ACTION____" + res.data.data)
+      dispatch({type: TYPES.SUPPLIER_BY_ID, data: res.data.data })
     } catch (error){
       toastr.error("temos um erro", error )
     }
@@ -87,7 +88,7 @@ export const editSupplierAct = (supplierId) => {
   }
 };
 
-export const updatesSupplierAct = ({ supplierId, ...data }) => {
+export const updateSupplierAct = ({ supplierId, ...data }) => {
   return(dispatch) => {
     dispatch({ type: TYPES.SUPPLIER_LOADING, status: true })
     dispatch({
@@ -122,5 +123,33 @@ export const updatesSupplierAct = ({ supplierId, ...data }) => {
         dispatch({ type: TYPES.SIGN_ERROR, data: error })
         toastr.error('Supplier', error.toString())
       })
+  }
+}
+export const setStatusSupplierAct = (supplierId, ativo) => {
+  console.log('fornecedor mudar status', ativo)
+  return async (dispatch, getState) => {
+    let result
+    try {
+      if (ativo) {
+        result = await deactivateSupplierSvc(supplierId)
+        toastr.success(
+          `Fornecedor ${result.data.data.tradeName}`,
+          'Desativado com sucesso'
+        )
+      } else {
+        result = await deactivateSupplierSvc(supplierId)
+        toastr.success(
+          `Fornecedor ${result.data.data.tradeName}`,
+          'Ativado com sucesso'
+        )
+      }
+      const all = getState().supplier.all
+      const index = all.findIndex((item) => item.id === supplierId)
+      all[index].status = result.data.data.status
+
+      dispatch({ type: TYPES.FORNECEDOR_ALL, data: [...all] })
+    } catch (err) {
+      console.log('###', err)
+    }
   }
 }

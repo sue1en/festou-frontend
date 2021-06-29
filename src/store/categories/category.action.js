@@ -91,8 +91,9 @@ export const editCategoryAct = (categoryId) => {
 }
 
 
-export const updateCategoryAct = ({ categoryId, ...data }) => {
+export const updateCategoryAct = ( data ) => {
   return (dispatch) => {
+    console.log(data)
     dispatch({ type: TYPES.CATEGORY_LOADING, status: true })
     dispatch({
       type: TYPES.CATEGORY_UPLOAD,
@@ -116,14 +117,15 @@ export const updateCategoryAct = ({ categoryId, ...data }) => {
     };
     const formData = new FormData()
     Object.keys(data).map((k) => formData.append(k, data[k]))
-    updateCategorySvc(categoryId, formData, config)
+    updateCategorySvc(data.id, formData, config)
       .then((result) => {
-        dispatch(editCategoryAct(categoryId))
+        // dispatch(editCategoryAct(categoryId))
         dispatch(getAllCategoryAct())
         toastr.success('Category', 'Categoria atualizada com sucesso')
-        dispatch({ type: TYPES.CATEGORY_UPDATE })
+        dispatch({ type: TYPES.CATEGORY_UPLOAD })
       })
       .catch((error) => {
+        console.log(error)
         dispatch({ type: TYPES.SIGN_ERROR, data: error })
         toastr.error('Category', error.toString())
       })

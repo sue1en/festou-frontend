@@ -30,8 +30,14 @@ const Form = ({submit, ...props}) => {
     status:false
   });
   const [isEdit, setIsEdit] = useState(false)
-  const percent = useSelector((state) => state.categories.upload?.percent || 0)
+  const percent = useSelector((state) => state.suppliers.upload?.percent || 0)
   const loading = false;
+
+  if(Object.keys(props).length > 0 && !isEdit){
+    setPreview(process.env.REACT_APP_API + props?.data?.image)
+    setForm(props.data)
+    setIsEdit(true)
+  };
 
   const handleChange = (props) => {
     const {value, name } = props.target
@@ -51,16 +57,20 @@ const Form = ({submit, ...props}) => {
       status: form.status.toString()
     }
     submit(newForm)
-    setForm({status: false})
   };
 
-  useEffect(() => {
-    if(Object.keys(props).length > 0 && !isEdit){
-      setPreview(process.env.REACT_APP_API + props?.data?.image)
-      setForm(props.data)
-      setIsEdit(true)
-    };
+  const cleanup = useCallback(() => {
+    setTimeout(() => {
+      setForm({ status:false})
+      setPreview('')
+    }, 2000)
   }, []);
+
+  useEffect(() => {
+    if(!loading){
+      cleanup()
+    }
+  }, [loading, cleanup]);
 
   const removeImage = () => {
     delete form.removeImage
@@ -80,7 +90,7 @@ const Form = ({submit, ...props}) => {
 
   return (
     <Box className={classes.mainBox}>
-      <h2>Categoria</h2>
+      <h2>Suppliers</h2>
       <form className={classes.textFieldStyle}>
         <TextField
           className={classes.textFieldStyle}
@@ -101,8 +111,8 @@ const Form = ({submit, ...props}) => {
           fullWidth
           rows={4}
           variant="outlined"
-          id='description'
-          name='description'
+          id='name'
+          name='name'
           label='Descrição da categoria'
           value={form.description || ''}
           onChange={handleChange}

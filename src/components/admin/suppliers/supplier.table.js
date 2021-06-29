@@ -22,22 +22,9 @@ import tableStyle from '../../../assets/styles/tableList.style'
 
 const useStyles = makeStyles(tableStyle)
 
-const CategoryList = ({ data, modal, loading }) => {
+const SuppliersList = ({ data, modal, loading }) => {
   const classes = useStyles()
   
-  const actions = ({ id }) => {
-    return (
-      <>
-        <IconButton  onClick={() => modal(2, id)}>
-          <EditIcon/>
-        </IconButton>
-        <IconButton  onClick={() => modal(3, id)}>
-          <DeleteOutlinedIcon/>
-        </IconButton>
-      </>
-    )
-  };
-
   const imgPath = process.env.REACT_APP_API;
   //falta definir essa const incompleta
   const undefinedImg = imgPath 
@@ -51,25 +38,16 @@ const CategoryList = ({ data, modal, loading }) => {
         <TableHead>
           <TableRow className={classes.mainHeadRow}>
             <TableCell align='left' colSpan={3}>
-              Lista de Categorias
-            </TableCell>
-            <TableCell>
-              <Fab
-                variant="extended" 
-                color="secondary" 
-                aria-label="add" 
-                className={classes.ButtonNewCategory}
-                onClick={() => modal(1, null)}
-              >
-                Nova <AddIcon/>
-              </Fab>
+              Lista de Fonecedores
             </TableCell>
           </TableRow>
           <TableRow className={classes.secondaryHeadRow}>
             <TableCell>Imagem</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>
+              Detalhes
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody className={classes.bodyTable}>
@@ -83,14 +61,22 @@ const CategoryList = ({ data, modal, loading }) => {
                 )}
               </TableCell>
               <TableCell>
-                {data.name}
+                {data.tradeName}
               </TableCell>
               <TableCell>
                 {/* TRATAR SWITCH */}
                 {data.status ? 'ativo' : 'inativo'}
               </TableCell>
               <TableCell>
-                {actions(data)}
+                <Button
+                  variant='contained'
+                  size='small'
+                  color="primary" 
+                  aria-label="add" 
+                  onClick={() => modal(1, data.id)}
+                >
+                  Detalhes
+                </Button>
               </TableCell>
             </TableRow> 
           ))}
@@ -100,4 +86,4 @@ const CategoryList = ({ data, modal, loading }) => {
   )
 }
 
-export default CategoryList
+export default SuppliersList

@@ -4,7 +4,8 @@ const INITIAL_STATE = {
   loading: false,
   all: [],
   upload: {},
-  selected: {}
+  selected: {},
+  getById:{}
 }
 
 const reducer = (state= INITIAL_STATE, action) => {

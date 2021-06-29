@@ -16,4 +16,4 @@ export const activateCategorySvc = (categoryId) => http.put(`${baseUrl}/${catego
 
 export const deactivateCategorySvc = (categoryId) => http.put(`${baseUrl}/${categoryId}/inativa`);
 
-export const deleteCategorySvc = (categoryId) => http.delete(`${baseUrl}/${categoryId}/delete`);
+export const deleteCategorySvc = (categoryId) => http.delete(`${baseUrl}/${categoryId}`);

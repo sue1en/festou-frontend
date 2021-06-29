@@ -15,6 +15,7 @@ import {
 import styled from 'styled-components'
 //COMPONENTS
 import CategoryList from '../../../components/admin/categories/category.table'
+import CategoryListTeste from '../../../components/admin/categories/category.teste'
 import Form from '../../../components/admin/categories/categories.form'
 import Remove from '../../../components/admin/categories/category.remove';
 import DialogModal from '../../../components/dialog';
@@ -27,6 +28,8 @@ function Categories () {
   // console.log(category)
   const loading = useSelector(state => state.categories.loading);
   const selected = useSelector(state => state.categories.selected);
+
+  console.log(selected)
 
   const callCategory = useCallback(() => {
     dispatch(getAllCategoryAct())
@@ -66,6 +69,9 @@ function Categories () {
   return (
     <CategoryBody>
       <div>
+        {/* <div>
+          <CategoryListTeste data={category} loading={loading} modal={openModal}/>
+        </div> */}
         <div>
           <CategoryList data={category} loading={loading} modal={openModal}/>
         </div>
