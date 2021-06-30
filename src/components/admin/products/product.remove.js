@@ -13,7 +13,7 @@ const Remove = ({ remove, close }) => {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Deseja Excluir a Categoria ?
+            Deseja Excluir o produto ?
           </Typography>
         </CardContent>
       </CardActionArea>

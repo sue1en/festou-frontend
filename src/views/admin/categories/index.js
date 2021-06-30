@@ -15,7 +15,6 @@ import {
 import styled from 'styled-components'
 //COMPONENTS
 import CategoryList from '../../../components/admin/categories/category.table'
-import CategoryListTeste from '../../../components/admin/categories/category.teste'
 import Form from '../../../components/admin/categories/categories.form'
 import Remove from '../../../components/admin/categories/category.remove';
 import DialogModal from '../../../components/dialog';
@@ -75,12 +74,14 @@ function Categories () {
         <div>
           <CategoryList data={category} loading={loading} modal={openModal}/>
         </div>
-        <DialogModal open={modal.status || false} close={closeModal}>
-          <div>
-            {modal.type === 1 ? <Form submit={submitForm}/> : null}
-            {modal.type === 2 ? (<Form submit={submitForm} data={selected}/>) : null}
+        <DialogModal
+          open={modal.status || false}
+          close={closeModal}
+          title='Categorias'  
+        >
+            {modal.type === 1 ? <Form close={closeModal} submit={submitForm}/> : null}
+            {modal.type === 2 ? (<Form close={closeModal} submit={submitForm} data={selected}/>) : null}
             {modal.type === 3 ? (<Remove close={closeModal} remove={submitForm}/>) : null}
-          </div>
         </DialogModal>
       </div>
     </CategoryBody>

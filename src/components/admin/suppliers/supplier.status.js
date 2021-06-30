@@ -7,20 +7,20 @@ import {
   Typography
 } from '@material-ui/core'
 
-const Remove = ({ remove, close }) => {
+const ChengeStatus = ({ status, close }) => {
   return (
     <Card>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Deseja Excluir a Categoria ?
+            Deseja inativar o fornecedor ?
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
         <Button
           size="small"
-          onClick={remove}
+          onClick={status}
           variant="contained"
           color="primary"
         >
@@ -39,4 +39,5 @@ const Remove = ({ remove, close }) => {
   )
 }
 
-export default Remove
+
+export default ChengeStatus

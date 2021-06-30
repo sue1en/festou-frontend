@@ -2,16 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllSupplierAct,
+  getByIdSupplierAct,
+  setStatusSupplierAct,
   createSupplierAct,
   editSupplierAct,
   updateSupplierAct,
   deleteSupplierAct,
-  getByIdSupplierAct,
 } from '../../../store/supplier/supplier.action';
-import { Button } from '@material-ui/core';
 
 import SupplierList from '../../../components/admin/suppliers/supplier.table'
 import SupplierDetails from '../../../components/admin/suppliers/supplier.details'
+import SupplierStatus from '../../../components/admin/suppliers/supplier.status'
 import DialogModal from '../../../components/dialog';
 
 
@@ -32,30 +33,34 @@ function Suppliers () {
     callSupplier();
   }, []);
 
-  const handleModalOpen = (type, id) => {
+
+
+  const toggleActive = (id, status) => {
+    dispatch(setStatusSupplierAct(id, status))
+  }
+
+  const handleModalOpen = (type, id, status) => {
       dispatch(getByIdSupplierAct(id)) 
       setModal({type, id, status:true})
   }
-
-  // const handleModalOpen = () => {
-  //   setModal(true)
-  // }
   const handleModalClose = () => {
     setModal(false)
   }
   
   return (
     <div>
-      {JSON.stringify(getById)}
       <div>
         <SupplierList data={supplier} loading={loading} modal={handleModalOpen}/>
       </div>
       <div>
-        {/* <Button onClick={handleModalOpen}>abrir</Button>
-        <DialogModal open={modal} close={handleModalClose}> alguma coisa</DialogModal> */}
-        <DialogModal open={modal.status || false} close={handleModalClose}>
+        <DialogModal
+          open={modal.status || false}
+          close={handleModalClose}
+          title='Parceiro' 
+        >
           <div>
             {modal.type === 1 ? (<SupplierDetails data={getById}/>) : null}
+            {modal.type === 2 ? (<SupplierStatus close={handleModalClose} status={toggleActive}/>) : null}
           </div>
         </DialogModal>
       </div>

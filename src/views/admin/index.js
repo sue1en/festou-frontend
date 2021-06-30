@@ -51,7 +51,7 @@ const Menu = [
     visibleMenu:true,
     enabled: true,
     component: Suppliers,
-    authorization: [1, 2, 3],
+    authorization: [1],
     icon:<FornecedoresIcon/>
   },
   {
@@ -61,18 +61,10 @@ const Menu = [
     visibleMenu:true,
     enabled: true,
     component: Clients,
-    authorization: [1, 2, 3],
+    authorization: [1, 2],
     icon:<ClientsIcon/>
 
   },
-  // {
-  //   title: 'Admin',
-  //   icons: '',
-  //   route: '/admin',
-  //   visibleMenu:true,
-  //   enabled: true,
-  //   component: Admin
-  // },
 ]
 
 

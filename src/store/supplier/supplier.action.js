@@ -32,7 +32,6 @@ export const getByIdSupplierAct = (supplierId) => {
   return async (dispatch) => {
     try{
       const res = await getByIdSupplierSvc(supplierId);
-      console.log("#####____ACTION____" + res.data.data)
       dispatch({type: TYPES.SUPPLIER_BY_ID, data: res.data.data })
     } catch (error){
       toastr.error("temos um erro", error )

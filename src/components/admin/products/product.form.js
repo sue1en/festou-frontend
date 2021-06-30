@@ -1,14 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import {
+  Box,
+  Switch,
+  Button,
+  TextField,
+  Typography,
+  FormControlLabel,
+  makeStyles, 
+} from '@material-ui/core'
+//ICONS
+import PhotoIcon from '@material-ui/icons/Photo';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+//STYLES
+import formStyle from '../../../assets/styles/categoryForm.style'
 
+const useStyled = makeStyles(formStyle)
 
-const Form = ({submit}) => {
+const Form = ({submit, close, ...props}) => {
+  const classes = useStyled()
   const [ preview, setPreview ] = useState('')
-  // const percent = useSelector((state) => state.categories.upload?.percent || 0)
-  const loading = false;
   const [form, setForm ] = useState({
     status:false
   });
+  const [isEdit, setIsEdit] = useState(false)
+  const percent = useSelector((state) => state.products.upload?.percent || 0)
+  const loading = false;
 
   const handleChange = (props) => {
     const {value, name } = props.target
@@ -28,20 +46,16 @@ const Form = ({submit}) => {
       status: form.status.toString()
     }
     submit(newForm)
+    setForm({status: false})
   };
 
-  const cleanup = useCallback(() => {
-    setTimeout(() => {
-      setForm({ status:false})
-      setPreview('')
-    }, 2000)
-  }, []);
-
   useEffect(() => {
-    if(!loading){
-      cleanup()
-    }
-  }, [loading, cleanup]);
+    if(Object.keys(props).length > 0 && !isEdit){
+      setPreview(process.env.REACT_APP_API + props?.data?.image)
+      setForm(props.data)
+      setIsEdit(true)
+    };
+  }, []);
 
   const removeImage = () => {
     delete form.removeImage
@@ -60,44 +74,126 @@ const Form = ({submit}) => {
   };
 
   return (
-    <div>
-      <label>
-        Name
-        <input type="text" name="name" id="name" value={form.name || ''} onChange={handleChange} />
-      </label>
-      <br/>
-      <br/>
-      <label>
-        Description
-        <input type="text" name="description" id="description" value={form.description || ''} onChange={handleChange} />
-      </label>
-      <br/>
-      <br/>
-      <label>
-        Status do Produto
-        <input type="checkbox" name="status" id="status" value={form.status} onChange={handleSwitch} />
-      </label>
-      <br/>
-      <br/>
-      <label>
-        Imagem do Produto
-        {preview.length > 0 
-          ? ( 
-              <div>
-                <img src={preview}/>
-                <button onClick={removeImage}>Remove</button>
+    <Box className={classes.mainBox}>
+      <form className={classes.textFieldStyle}>
+        <TextField
+          className={classes.textFieldStyle}
+          variant="outlined"
+          required
+          fullWidth
+          id='name'
+          name='name'
+          label='Nome da Categoria'
+          value={form.name || ''}
+          onChange={handleChange}
+          // disabled={loading}
+        />
+        <TextField
+          className={classes.textFieldStyle}
+          required
+          multiline
+          fullWidth
+          rows={4}
+          variant="outlined"
+          id='description'
+          name='description'
+          label='Descrição da categoria'
+          value={form.description || ''}
+          onChange={handleChange}
+          // disabled={loading}
+        />
+        <TextField
+          className={classes.textFieldStyle}
+          required
+          multiline
+          fullWidth
+          rows={4}
+          variant="outlined"
+          id='price'
+          name='price'
+          label='preço'
+          value={form.price || ''}
+          onChange={handleChange}
+          // disabled={loading}
+        />
+        <div>
+          <Typography>Status do produto:</Typography>
+          <FormControlLabel
+            control={
+              <Switch
+                name="status"
+                color="primary"
+                // disabled={loading}
+                checked={form.status}
+                onChange={handleSwitch}
+              />
+            }
+            label={form.status ? 'ativo' : 'inativo'}
+          />
+        </div>
+        <Box className={classes.imageMainBox}>
+          {preview.length > 0
+            ? (
+              <div className={classes.imageUploadBox}>
+                <Button 
+                  fullWidth
+                  color="secondary"
+                  variant="contained"
+                  className={classes.styledButton}
+                  onClick={removeImage}
+                  component='label'
+                  startIcon={<DeleteOutlineIcon/>}
+                >
+                  Remover Imagem
+                </Button>
+                <Box>
+                  <img src={preview} className={classes.profilePhoto} alt='Imagem da Categoria'/>
+                </Box>
               </div>
-            ) : ( 
-                <button onClick={removeImage}>
-                  <input accept="image/*" type="file" name="image" id="image" 
-                  onChange={previewImg} />
-                </button>
-            )}
-      </label>
-      <br/>
-      <br/>
-      <button type="button" onClick={handleSubmit}>Enviar</button>
-    </div>
+              )
+            : (
+              <div className={classes.imageUploadBox}>
+                <Button
+                  fullWidth
+                  variant='contained'
+                  size='small'
+                  component='label'
+                  className={classes.styledButton}
+                  startIcon={<CloudUploadIcon />}
+                  > 
+                  Upload Imagem
+                  <input
+                    accept='image/*'
+                    type='file'
+                    name='image'
+                    hidden
+                    onChange={previewImg}
+                    />
+                </Button>
+                <PhotoIcon className={classes.profilePhoto}/>
+              </div>
+            )} 
+        </Box>
+        <Button
+          variant="contained"
+          // fullWidth
+          size='large'
+          type='button'
+          onClick={handleSubmit}
+          className={classes.styledButton}
+        >
+          {isEdit ? 'Atualizar' : 'Enviar'}
+        </Button>
+        <Button
+          size="small"
+          onClick={close}
+          variant="contained"
+          color="secondary"
+        >
+          Não
+        </Button>
+      </form>
+    </Box>
   )
 };
 

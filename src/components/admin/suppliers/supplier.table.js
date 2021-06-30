@@ -1,16 +1,15 @@
 import React from 'react';
 import {
   makeStyles,
-  Button,
-  Fab,
-  IconButton,
-  Collapse,
   Table,
+  Button,
+  Switch,
   TableRow,
   TableCell,
   TableBody,
   TableHead,
   TableContainer,
+  FormControlLabel,
 } from '@material-ui/core'
 //ICONS
 import EditIcon from '@material-ui/icons/Edit';
@@ -65,7 +64,20 @@ const SuppliersList = ({ data, modal, loading }) => {
               </TableCell>
               <TableCell>
                 {/* TRATAR SWITCH */}
-                {data.status ? 'ativo' : 'inativo'}
+                <div>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        name="status"
+                        color="primary"
+                        // disabled={loading}
+                        checked={data.status === true ? true : false}
+                        onChange={() => modal(2, data.id)}
+                      />
+                    }
+                    label={data.status === true ? 'ativo' : 'inativo'}
+                  />
+                </div>
               </TableCell>
               <TableCell>
                 <Button

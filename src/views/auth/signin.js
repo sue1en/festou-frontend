@@ -6,9 +6,9 @@ import {
   makeStyles,
   Box,
   Grid,
-  Paper,
   Button,
-  Container,
+  List,
+  ListItem,
   TextField,
   InputAdornment,
 } from '@material-ui/core';
@@ -82,7 +82,7 @@ const SignIn = () => {
           <TextField
             id='password'
             name='password'
-            label='pasword'
+            label='password'
             type='password'
             value={form.password || ''}
             onChange={handleChange}
@@ -109,14 +109,17 @@ const SignIn = () => {
           >
             Entrar
           </Button>
-          <Grid container>
-            <Grid item>
-              Já é cadastrado?
+          <div>
+            <p>Ainda não é cadastrado?</p>
+            <p>
               <Link to='/signin' variant='body2'>
-                &ensp;Faça seu Login
+                &ensp;Cadastre-se como usuário
+              </Link> /
+              <Link to='/signin' variant='body2'>
+                &ensp;ou seja um parceiro
               </Link>
-            </Grid>
-          </Grid>
+            </p>
+          </div>
         </form>
       </Box>
     </Box>

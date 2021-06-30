@@ -51,16 +51,17 @@ export const getAllProductAct = () => {
     }
   }
 }
+
 export const deleteProductAct = (productId) => {
   return async (dispatch) => {
     try {
       const result = await deleteProductSvc(productId)
       dispatch({ type: TYPES.PRODUCT_EDIT, data: result.data })
-      toastr.success('Categoria', 'Removido com sucesso')
+      toastr.success('Produto', 'Removido com sucesso')
       dispatch(getAllProductAct())
     } catch (error) {
       toastr.error('aconteceu um erro', error)
-      toastr.error('Categoria', error.toString())
+      toastr.error('Produto', error.toString())
     }
   }
 }
@@ -70,6 +71,43 @@ export const editProductAct = () => {
 
 }
 
-export const updateProductAct = () => {
+export const updateProductAct = ( data ) => {
+  return (dispatch) => {
+    console.log(data)
+    dispatch({ type: TYPES.PRODUCT_LOADING, status: true })
+    dispatch({
+      type: TYPES.PRODUCT_UPLOAD,
+      upload: 0
+    });
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      onUploadProgress: function (progressEvent) {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        )
+        console.log('percentCompleted', percentCompleted)
 
+        dispatch({
+          type: TYPES.PRODUCT_UPLOAD,
+          upload: percentCompleted
+        })
+      }
+    };
+    const formData = new FormData()
+    Object.keys(data).map((k) => formData.append(k, data[k]))
+    updateProductSvc(data.id, formData, config)
+      .then((result) => {
+        // dispatch(editProductAct(categoryId))
+        dispatch(getAllProductAct())
+        toastr.success('Product', 'Product atualizada com sucesso')
+        dispatch({ type: TYPES.PRODUCT_UPLOAD })
+      })
+      .catch((error) => {
+        console.log(error)
+        dispatch({ type: TYPES.SIGN_ERROR, data: error })
+        toastr.error('Product', error.toString())
+      })
+  }
 }

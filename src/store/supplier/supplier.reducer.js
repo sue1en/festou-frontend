@@ -21,7 +21,6 @@ const reducer = ( state = INITIAL_STATE, action) => {
     case TYPES.SUPPLIER_BY_ID:
       state.getById = action.data
       state.loading = false
-      console.log("###___REDUCER___" + state.getById)
       return state
     case TYPES.SUPPLIER_CREATE:
       state.loading = false

@@ -1,16 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import {
   Box,
-  Grid,
-  Select,
   Switch,
   Button,
-  Container,
   TextField,
   Typography,
-  FormControl,
-  InputAdornment,
   FormControlLabel,
   makeStyles, 
 } from '@material-ui/core'
@@ -19,11 +14,11 @@ import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 //STYLES
-import modalStyle from '../../../assets/styles/modalForm.style'
+import formStyle from '../../../assets/styles/categoryForm.style'
 
-const useStyled = makeStyles(modalStyle)
+const useStyled = makeStyles(formStyle)
 
-const Form = ({submit, ...props}) => {
+const Form = ({submit, close, ...props}) => {
   const classes = useStyled()
   const [ preview, setPreview ] = useState('')
   const [form, setForm ] = useState({
@@ -80,7 +75,6 @@ const Form = ({submit, ...props}) => {
 
   return (
     <Box className={classes.mainBox}>
-      <h2>Categoria</h2>
       <form className={classes.textFieldStyle}>
         <TextField
           className={classes.textFieldStyle}
@@ -139,7 +133,7 @@ const Form = ({submit, ...props}) => {
                   Remover Imagem
                 </Button>
                 <Box>
-                  <img src={preview} className={classes.profilePhoto} alt='Foto do perfil'/>
+                  <img src={preview} className={classes.profilePhoto} alt='Imagem da Categoria'/>
                 </Box>
               </div>
               )
@@ -168,13 +162,21 @@ const Form = ({submit, ...props}) => {
         </Box>
         <Button
           variant="contained"
-          fullWidth
+          // fullWidth
           size='large'
           type='button'
           onClick={handleSubmit}
           className={classes.styledButton}
         >
           {isEdit ? 'Atualizar' : 'Enviar'}
+        </Button>
+        <Button
+          size="small"
+          onClick={close}
+          variant="contained"
+          color="secondary"
+        >
+          Não
         </Button>
       </form>
     </Box>
