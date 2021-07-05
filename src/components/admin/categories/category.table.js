@@ -1,16 +1,16 @@
 import React from 'react';
 import {
   makeStyles,
-  Button,
   Fab,
-  IconButton,
-  Collapse,
   Table,
+  Switch,
   TableRow,
   TableCell,
   TableBody,
   TableHead,
   TableContainer,
+  IconButton,
+  FormControlLabel,
 } from '@material-ui/core'
 //ICONS
 import EditIcon from '@material-ui/icons/Edit';

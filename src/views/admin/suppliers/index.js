@@ -34,14 +34,13 @@ function Suppliers () {
   }, []);
 
 
-
-  const toggleActive = (id, status) => {
-    dispatch(setStatusSupplierAct(id, status))
+  const toggleActive = () => {
+    dispatch(setStatusSupplierAct(modal.id, !modal.supplierStatus)).then(handleModalClose)
   }
 
-  const handleModalOpen = (type, id, status) => {
+  const handleModalOpen = (type, id, supplierStatus) => {
       dispatch(getByIdSupplierAct(id)) 
-      setModal({type, id, status:true})
+      setModal({type, id, supplierStatus, status:true})
   }
   const handleModalClose = () => {
     setModal(false)

@@ -6,43 +6,42 @@ import {
   Button 
 } from '@material-ui/core';
 import {
-  getAllCategoryAct,
-  createCategoryAct,
-  editCategoryAct,
-  updateCategoryAct,
-  deleteCategoryAct,
-} from '../../../store/categories/category.action';
+  getAllProductAct,
+  createProductAct,
+  editProductAct,
+  updateProductAct,
+  deleteProductAct,
+  getSupplierProductsAct,
+} from '../../../store/products/products.action';
 import styled from 'styled-components'
 //COMPONENTS
-import CategoryList from '../../../components/admin/categories/category.table'
-import Form from '../../../components/admin/categories/categories.form'
-import Remove from '../../../components/admin/categories/category.remove';
+import ProductList from '../../../components/admin/products/product.table'
+import Form from '../../../components/admin/products/product.form'
+import Remove from '../../../components/admin/products/product.remove';
 import DialogModal from '../../../components/dialog';
 
-function Categories () {
+function MemberProducts () {
   const dispatch = useDispatch();
   const [modal, setModal] = useState({})
 
-  const category = useSelector(state => state.categories.all?.data);
-  console.log(category)
-  const loading = useSelector(state => state.categories.loading);
-  const selected = useSelector(state => state.categories.selected);
+  const myProducts = useSelector(state => state.products.bySupplier);
+  const loading = useSelector(state => state.products.loading);
+  const selected = useSelector(state => state.products.selected);
+  const userId = useSelector(state => state.auth.user?.id);
 
-  console.log(selected)
 
-  const callCategory = useCallback(() => {
-    dispatch(getAllCategoryAct())
-    }, [dispatch]);
+  const callProduct = useCallback(() => {
+    dispatch(getSupplierProductsAct(userId))
+    }, []);
 
   useEffect(() => {
-    callCategory();
-  }, [callCategory]);
+    callProduct();
+  }, []);
 
   const closeModal = () => setModal({ status: false })
-  
   const openModal = (type = 1, id = null) => {
     if(id){
-      dispatch(editCategoryAct(id)).then(() => 
+      dispatch(editProductAct(id)).then(() => 
         setModal({type, id, status:true})
       )
     } else {
@@ -53,13 +52,13 @@ function Categories () {
   const submitForm = (form) => {
     switch (modal.type){
       case 1:
-        dispatch(createCategoryAct(form))
+        dispatch(createProductAct(form))
         return
       case 2:
-        dispatch(updateCategoryAct(form))
+        dispatch(updateProductAct(form, userId))
         return
       case 3:
-        dispatch(deleteCategoryAct(modal.id)).then(() => setModal(false))
+        dispatch(deleteProductAct(modal.id)).then(() => setModal(false))
         return
       default:
         return false
@@ -70,12 +69,12 @@ function Categories () {
     <CategoryBody>
       <div>
         <div>
-          <CategoryList data={category} loading={loading} modal={openModal}/>
+          <ProductList data={myProducts} loading={loading} modal={openModal}/>
         </div>
         <DialogModal
           open={modal.status || false}
           close={closeModal}
-          title='Categorias'  
+          title='produtos'  
         >
             {modal.type === 1 ? <Form close={closeModal} submit={submitForm}/> : null}
             {modal.type === 2 ? (<Form close={closeModal} submit={submitForm} data={selected}/>) : null}
@@ -86,7 +85,7 @@ function Categories () {
   )
 };
 
-export default Categories;
+export default MemberProducts;
 
 const CategoryBody = styled.div`
   padding: 50px;

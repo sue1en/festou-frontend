@@ -19,6 +19,8 @@ const modalFormStyle = {
   },
   textFieldStyle:{
     marginBottom: '15px',
+    minWidth: '290px',
+    maxWidth: '520px',
    
   },
   imageMainBox:{

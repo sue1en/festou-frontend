@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategoryAct } from '../../../store/categories/category.action'
 import {
+  makeStyles,
   Box,
+  Select,
   Switch,
   Button,
   TextField,
+  InputLabel,
   Typography,
+  FormControl,
+  TextareaAutosize,
   FormControlLabel,
-  makeStyles, 
 } from '@material-ui/core'
 //ICONS
 import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 //STYLES
-import formStyle from '../../../assets/styles/categoryForm.style'
+import formStyle from '../../../assets/styles/toModalForm.style'
 
 const useStyled = makeStyles(formStyle)
 
 const Form = ({submit, close, ...props}) => {
+  const dispatch = useDispatch()
   const classes = useStyled()
   const [ preview, setPreview ] = useState('')
+  const [isEdit, setIsEdit] = useState(false);
   const [form, setForm ] = useState({
-    status:false
+    status:false,
   });
-  const [isEdit, setIsEdit] = useState(false)
-  const percent = useSelector((state) => state.products.upload?.percent || 0)
-  const loading = false;
+  const category = useSelector(state => state.categories.all?.data);
+  console.log("##___CAT___" + category)
+  // const percent = useSelector((state) => state.products.upload?.percent || 0);
+  // const loading = false;
+
 
   const handleChange = (props) => {
     const {value, name } = props.target
@@ -43,7 +52,8 @@ const Form = ({submit, close, ...props}) => {
   const handleSubmit = () => {
     const newForm = {
       ...form,
-      status: form.status.toString()
+      status: form.status ? form.status.toString() : 'false',
+      categoriesId: form.categories
     }
     submit(newForm)
     setForm({status: false})
@@ -55,6 +65,7 @@ const Form = ({submit, close, ...props}) => {
       setForm(props.data)
       setIsEdit(true)
     };
+    dispatch(getAllCategoryAct())
   }, []);
 
   const removeImage = () => {
@@ -75,7 +86,7 @@ const Form = ({submit, close, ...props}) => {
 
   return (
     <Box className={classes.mainBox}>
-      <form className={classes.textFieldStyle}>
+      <form className={classes.formStyled}>
         <TextField
           className={classes.textFieldStyle}
           variant="outlined"
@@ -83,7 +94,7 @@ const Form = ({submit, close, ...props}) => {
           fullWidth
           id='name'
           name='name'
-          label='Nome da Categoria'
+          label='Nome do Produto'
           value={form.name || ''}
           onChange={handleChange}
           // disabled={loading}
@@ -93,21 +104,6 @@ const Form = ({submit, close, ...props}) => {
           required
           multiline
           fullWidth
-          rows={4}
-          variant="outlined"
-          id='description'
-          name='description'
-          label='Descrição da categoria'
-          value={form.description || ''}
-          onChange={handleChange}
-          // disabled={loading}
-        />
-        <TextField
-          className={classes.textFieldStyle}
-          required
-          multiline
-          fullWidth
-          rows={4}
           variant="outlined"
           id='price'
           name='price'
@@ -116,6 +112,47 @@ const Form = ({submit, close, ...props}) => {
           onChange={handleChange}
           // disabled={loading}
         />
+        <TextField 
+          className={classes.textFieldStyle}
+          required
+          multiline
+          fullWidth
+          rows={5}
+          variant="outlined"
+          id='description'
+          name='description'
+          label='Descrição do produto'
+          placeholder='Descrição do produto'
+          value={form.description || ''}
+          onChange={handleChange}
+          // disabled={loading}
+        />
+        <div>
+          {JSON.stringify(form)}
+          {JSON.stringify(category)}
+        </div>
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="outlined-age-native-simple">Categoria</InputLabel>
+          <Select
+            size="small"
+            variant="outlined"
+            native
+            value={form.categories || ''}
+            onChange={handleChange}
+            label="Categoria"
+            inputProps={{
+              name: 'categories',
+              id: 'outlined-native-simple',
+            }}
+          >
+            <option disabled value=''></option>
+            {category?.map(({id, name}, i) => (
+              <option key={i} value={id}>
+                {name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
         <div>
           <Typography>Status do produto:</Typography>
           <FormControlLabel

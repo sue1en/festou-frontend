@@ -68,6 +68,7 @@ const CategoryList = ({ data, modal, loading }) => {
           <TableRow className={classes.secondaryHeadRow}>
             <TableCell>Imagem</TableCell>
             <TableCell>Nome</TableCell>
+            <TableCell>Preço</TableCell>
             <TableCell>Status</TableCell>
             <TableCell>Ações</TableCell>
           </TableRow>
@@ -77,13 +78,17 @@ const CategoryList = ({ data, modal, loading }) => {
             <TableRow key={i}>
               <TableCell>
                 {imgPath+data.image !== undefinedImg ? (
-                  <img src={imgPath + data.image} alt={`Cat ${data.name}`}  className={classes.media}/>
+                  <img src={imgPath + data.image} alt={data.name}  className={classes.media}/>
                 ) : (
                   <ImageIcon/>
                 )}
               </TableCell>
               <TableCell>
                 {data.name}
+              </TableCell>
+              <TableCell>
+                {/* TRATAR SWITCH */}
+                {data.price}
               </TableCell>
               <TableCell>
                 {/* TRATAR SWITCH */}

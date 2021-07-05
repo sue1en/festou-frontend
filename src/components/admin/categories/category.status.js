@@ -13,7 +13,7 @@ const ChengeStatus = ({ status, close }) => {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Deseja alterar o status do fornecedor ?
+            Deseja alterar o status da categoria ?
           </Typography>
         </CardContent>
       </CardActionArea>

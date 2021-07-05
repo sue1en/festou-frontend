@@ -14,7 +14,7 @@ import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 //STYLES
-import formStyle from '../../../assets/styles/categoryForm.style'
+import formStyle from '../../../assets/styles/toModalForm.style'
 
 const useStyled = makeStyles(formStyle)
 

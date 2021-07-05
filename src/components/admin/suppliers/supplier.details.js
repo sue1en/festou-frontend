@@ -15,7 +15,7 @@ import {
 //ICONS
 
 //STYLES
-import modalStyle from '../../../assets/styles/categoryForm.style'
+import modalStyle from '../../../assets/styles/toModalForm.style'
 
 const useStyled = makeStyles(modalStyle)
 

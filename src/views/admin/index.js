@@ -2,9 +2,10 @@ import { Router } from '@reach/router';
 import PainelLayout from '../../components/layout/painelLayout.js'
 import Home from './home';
 import Categories from './categories';
-import Products from './products';
+import MemberProducts from './member-products';
 import Suppliers from './suppliers';
 import Clients from './clients';
+import Products from './products';
 import { useSelector } from 'react-redux';
 import {
   Category as CategoryIcon,
@@ -41,7 +42,17 @@ const Menu = [
     visibleMenu:true,
     enabled: true,
     component: Products,
-    authorization: [1, 2, 3],
+    authorization: [1],
+    icon: <ProductsIcon/>
+  },
+  {
+    title: 'My Products',
+    icons: '',
+    route: '/memberproducts',
+    visibleMenu:true,
+    enabled: true,
+    component: MemberProducts,
+    authorization: [2],
     icon: <ProductsIcon/>
   },
   {

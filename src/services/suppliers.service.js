@@ -15,3 +15,20 @@ export const activateSupplierSvc = (supplierId) => http.put(`${baseUrl}/${suppli
 export const deactivateSupplierSvc = (supplierId) => http.put(`${baseUrl}/${supplierId}/inativa`);
 
 export const deleteSupplierSvc = (supplierId) => http.delete(`${baseUrl}/${supplierId}/delete`);
+
+//Produtos do fornecedor
+export const getSupplierProductsSvc = (supplierId) => http.get(`${baseUrl}/${supplierId}/products`);
+
+export const getByIdSupplierProductsSvc = (supplierId, productId) => http.get(`${baseUrl}/${supplierId}/products/${productId}`);
+
+export const createProductSvc = (supplierId, data, config = {}) => http.post(`${baseUrl}/${supplierId}/products`, data, config);
+
+export const updateProductSvc = (supplierId, productId, data, config = {}) => http.put(`${baseUrl}/${supplierId}/products/${productId}`, data, config);
+
+export const deleteProductSvc = (supplierId, productId) => http.delete(`${baseUrl}/${supplierId}/products/${productId}/delete`);
+
+// AINDA NÃO ESTÃO COMPLETAS */
+
+// export const activateProductSvc = (supplierId, productId) => http.put(`${baseUrl}/${supplierId}/products${productId}/ativa`);
+
+// export const deactivateProductSvc = (supplierId, productId) => http.put(`${baseUrl}/${supplierId}/products${productId}/inativa`);

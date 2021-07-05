@@ -19,7 +19,7 @@ import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 //STYLES
-import modalStyle from '../../../assets/styles/modalForm.style'
+import modalStyle from '../../../assets/styles/toModalForm.style'
 
 const useStyled = makeStyles(modalStyle)
 

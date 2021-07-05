@@ -1,10 +1,14 @@
 import {
   getAllProductSvc,
   getByIdProductSvc,
+} from '../../services/products.service';
+import {
   createProductSvc,
   updateProductSvc,
-  deleteProductSvc
-} from '../../services/products.service';
+  deleteProductSvc,
+  getSupplierProductsSvc,
+  getByIdSupplierProductsSvc,
+} from '../../services/suppliers.service';
 import TYPES from '../types';
 import { toastr } from 'react-redux-toastr';
 
@@ -36,16 +40,29 @@ export const createProductAct = (data) => {
       toastr.success('Produto', 'Produto cadastrado com sucesso')
       dispatch(getAllProductAct())
     } catch (error) {
-      toastr.error('Produto', 'deu ruim')
+      toastr.error('Produto', 'deu ruim', error)
     }
+    console.log('disparar...', data)
   }
-}
+};
 export const getAllProductAct = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: TYPES.PRODUCT_LOADING, status: true })
       const result = await getAllProductSvc()
-      dispatch({ type: TYPES.PRODUCT_ALL, data: result.data.data })
+      dispatch({ type: TYPES.PRODUCT_ALL, data: result.data })
+    } catch (error) {
+      toastr.error('aconteceu um erro', error)
+    }
+  }
+}
+
+export const getSupplierProductsAct = (supplierId) => {
+  return async (dispatch) => {
+    try{
+      dispatch({ type: TYPES.PRODUCT_LOADING, status: true })
+      const result = await getSupplierProductsSvc(supplierId)
+      dispatch({ type: TYPES.PRODUCT_BY_SUPPLIER, data: result.data.data })
     } catch (error) {
       toastr.error('aconteceu um erro', error)
     }
@@ -67,11 +84,22 @@ export const deleteProductAct = (productId) => {
 }
 
 
-export const editProductAct = () => {
-
+export const editProductAct = (productId) => {
+  return async (dispatch) => {
+    dispatch({
+      type: TYPES.PRODUCT_UPLOAD,
+      upload: 0
+    })
+    try {
+      const result = await getByIdProductSvc(productId)
+      dispatch({ type: TYPES.PRODUCT_EDIT, data: result.data })
+    } catch (error) {
+      toastr.error('temos um erro', error)
+    }
+  }
 }
 
-export const updateProductAct = ( data ) => {
+export const updateProductAct = ( data, supplierId ) => {
   return (dispatch) => {
     console.log(data)
     dispatch({ type: TYPES.PRODUCT_LOADING, status: true })
@@ -97,10 +125,10 @@ export const updateProductAct = ( data ) => {
     };
     const formData = new FormData()
     Object.keys(data).map((k) => formData.append(k, data[k]))
-    updateProductSvc(data.id, formData, config)
+    updateProductSvc(supplierId, data.id, formData, config)
       .then((result) => {
         // dispatch(editProductAct(categoryId))
-        dispatch(getAllProductAct())
+        dispatch(getSupplierProductsAct(supplierId))
         toastr.success('Product', 'Product atualizada com sucesso')
         dispatch({ type: TYPES.PRODUCT_UPLOAD })
       })

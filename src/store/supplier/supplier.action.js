@@ -136,15 +136,15 @@ export const setStatusSupplierAct = (supplierId, ativo) => {
           'Desativado com sucesso'
         )
       } else {
-        result = await deactivateSupplierSvc(supplierId)
+        result = await activateSupplierSvc(supplierId)
         toastr.success(
           `Fornecedor ${result.data.data.tradeName}`,
           'Ativado com sucesso'
         )
       }
-      const all = getState().supplier.all
-      const index = all.findIndex((item) => item.id === supplierId)
-      all[index].status = result.data.data.status
+      const all = getState().suppliers.all
+      const index = all.data.findIndex((item) => item.id === supplierId)
+      all.data[index].status = result.data.data.status
 
       dispatch({ type: TYPES.FORNECEDOR_ALL, data: [...all] })
     } catch (err) {

@@ -1,6 +1,6 @@
 # Festou - Front-end
 ```console
-  Projeto em desenvolvimento.
+  Projeto em desenvolvimento....
 ```
 
 - Projeto desenvolvido no curso de Full Stack Developer dado pelo Instituto Infnet.

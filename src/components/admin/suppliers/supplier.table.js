@@ -12,9 +12,6 @@ import {
   FormControlLabel,
 } from '@material-ui/core'
 //ICONS
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import AddIcon from '@material-ui/icons/Add';
 import ImageIcon from '@material-ui/icons/Image';
 //STYLES
 import tableStyle from '../../../assets/styles/tableList.style'
@@ -71,11 +68,11 @@ const SuppliersList = ({ data, modal, loading }) => {
                         name="status"
                         color="primary"
                         // disabled={loading}
-                        checked={data.status === true ? true : false}
-                        onChange={() => modal(2, data.id)}
+                        checked={data.status.toUpperCase() === 'ATIVA'}
+                        onChange={() => modal(2, data.id, !(data.status.toUpperCase() === 'ATIVA'))}
                       />
                     }
-                    label={data.status === true ? 'ativo' : 'inativo'}
+                    label={data.status}
                   />
                 </div>
               </TableCell>
