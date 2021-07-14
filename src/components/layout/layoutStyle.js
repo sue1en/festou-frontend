@@ -6,15 +6,19 @@ const headerStyle = ((theme) => ({
   },
   appBar: {
     display: 'flex',
+    justifyContent:'center',
+    height: '70px',
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor:'#000000',
+    backgroundColor:theme.palette.background.main,
     position: 'absolute',
     top: 0,
     width: theme.spacing('100%'),
   },
-  title: {
+  logo: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    minWidth: '120px',
+    margin: '10px 50px 5px 50px',
+    [theme.breakpoints.up('xs')]: {
       display: 'flex',
     },
   },
@@ -22,21 +26,45 @@ const headerStyle = ((theme) => ({
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
+      '& li':{
+        "&:hover": {
+          borderRadius:'20px',
+          backgroundColor: theme.palette.third.light,
+        },
+      },
     },
+  },
+  munuItemStyle: {
+  },
+  textLink: {
+    color:theme.palette.navBarLink.main,
+    textDecoration:'none',
+    fontWeight:'bold',
   },
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
+      '& li':{
+        "&:hover": {
+          borderRadius:'10px',
+          backgroundColor: theme.palette.third.light,
+        },
+      },
     }, 
   },
 }))
 
 const mainStyle = {
   mainBox:{
-    display:'block',
-    marginTop:'64px',
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:'150px',
     height:'100%',
+    width:'80vw',
+    flexGrow: 1,
   },
 }
 

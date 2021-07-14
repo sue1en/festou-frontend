@@ -62,11 +62,11 @@ const Header = () => {
       onClose={handleProfileMenuClose}
     >
       <MenuItem onClick={handleProfileMenuClose}>
-        <Link component={LinkRoute} color="inherit" noWrap to="admin">
+        <LinkRoute to="admin" className={classes.textLink}>
           Dashboard
-        </Link>
+        </LinkRoute>
       </MenuItem>
-      <MenuItem onClick={logout}>Logout</MenuItem>
+      <MenuItem onClick={logout} className={classes.textLink}>Logout</MenuItem>
     </Menu>
   );
 
@@ -81,23 +81,23 @@ const Header = () => {
       open={Boolean(mobileAnchorEl)}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <Link component={LinkRoute} color="inherit" noWrap to="products">
+      <MenuItem className={classes.menuItemStyle}>
+        <LinkRoute to="products" className={classes.textLink}>
           Produtos
-        </Link>
+        </LinkRoute>
       </MenuItem>
-      <MenuItem>
-        <Link component={LinkRoute} color="inherit" noWrap to="aboutus">
+      <MenuItem ListItemClasses={classes.menuItemStyle}>
+        <LinkRoute to="aboutus" className={classes.textLink}>
           Sobre nós
-        </Link>
+        </LinkRoute>
       </MenuItem>
       {isAuthenticated() ? 
         (
           <div>
-            <MenuItem>
-              <Link component={LinkRoute} color="inherit" noWrap to="admin">
+            <MenuItem className={classes.menuItemStyle}>
+              <LinkRoute color="primary" to="admin" className={classes.textLink}>
                 Dashboard
-              </Link>
+              </LinkRoute>
             </MenuItem>
             <MenuItem onClick={logout}>
               Logout
@@ -105,20 +105,20 @@ const Header = () => {
           </div>
         ) : (
           <div>
-            <MenuItem>
-              <Link component={LinkRoute} color="inherit" noWrap to="newsupplier"> 
+            <MenuItem className={classes.menuItemStyle}>
+              <LinkRoute color="inherit" to="newsupplier" className={classes.textLink}> 
                 Seja Parceiro
-              </Link>
+              </LinkRoute>
             </MenuItem>
-            <MenuItem>
-              <Link component={LinkRoute} color="inherit" noWrap to="newclient"> 
+            <MenuItem className={classes.menuItemStyle}>
+              <LinkRoute color="inherit" to="newclient" className={classes.textLink}> 
                 Cadastrar
-              </Link>
+              </LinkRoute>
             </MenuItem>
-            <MenuItem>
-              <Link component={LinkRoute} color="inherit" noWrap to="signin"> 
+            <MenuItem className={classes.menuItemStyle}>
+              <LinkRoute color="inherit" to="signin" className={classes.textLink}> 
                 Login
-              </Link>
+              </LinkRoute>
             </MenuItem>
           </div>
         )}
@@ -129,23 +129,20 @@ const Header = () => {
     <div className={classes.grow}>
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Link component={LinkRoute} color="inherit" noWrap to="/">
-            <Typography className={classes.title} variant="h5" noWrap>
-              <Avatar src={HeaderLogo} alt='logo'/>
-                festou
-            </Typography>
-          </Link>
+          <LinkRoute to="/">
+            <img src={HeaderLogo} alt='FestouLogo'className={classes.logo}/>
+          </LinkRoute>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <MenuItem>
-              <Link component={LinkRoute} color="inherit" noWrap to="products"> 
+            <MenuItem ListItemClasses={classes.menuItemStyle}>
+              <LinkRoute to="products" className={classes.textLink}> 
                 Produtos
-              </Link>
+              </LinkRoute>
             </MenuItem>
-            <MenuItem>
-              <Link component={LinkRoute} color="inherit" noWrap to="aboutus"> 
+            <MenuItem className={classes.menuItemStyle}>
+              <LinkRoute to="aboutus" className={classes.textLink}> 
                 Sobre
-              </Link>
+              </LinkRoute>
             </MenuItem>
             {isAuthenticated() ?
               (
@@ -161,26 +158,26 @@ const Header = () => {
                 </IconButton>
               ) : (
                 <div className={classes.sectionDesktop}>
-                  <MenuItem>
-                    <Link component={LinkRoute} color="inherit" noWrap to="newsupplier"> 
+                  <MenuItem className={classes.menuItemStyle}>
+                    <LinkRoute to="newsupplier" className={classes.textLink}> 
                       Seja Parceiro
-                    </Link>
+                    </LinkRoute>
                   </MenuItem>
-                  <MenuItem>
-                    <Link component={LinkRoute} color="inherit" noWrap to="newclient">
+                  <MenuItem className={classes.menuItemStyle}>
+                    <LinkRoute to="newclient" className={classes.textLink}>
                       Cadastrar
-                    </Link>
+                    </LinkRoute>
                   </MenuItem>
-                  <MenuItem>
-                    <Link component={LinkRoute} color="inherit" noWrap to="signin">
+                  <MenuItem className={classes.menuItemStyle}>
+                    <LinkRoute to="signin" className={classes.textLink}>
                       Login
-                    </Link>
+                    </LinkRoute>
                   </MenuItem>
                 </div>
             )}
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton aria-label="show more" aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
+            <IconButton aria-label="show more" aria-haspopup="true" onClick={handleMobileMenuOpen}>
               <MenuIcon />
             </IconButton>
           </div>
@@ -193,8 +190,3 @@ const Header = () => {
 }
 
 export default Header;
-
-//estilos
-/* const HeaderTag = styled.header`
-   background-color:${props => props.theme.main};
-`*/

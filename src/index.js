@@ -6,16 +6,16 @@ import Routers from './routers';
 import ReduxToastr from './components/redux-toastr';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 import GlobalStyle from './config/globalStyled'
-import { ThemeProvider } from 'styled-components'
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './plugins/theme'
 
 ReactDOM.render(
   <Provider store={store}>
     <ReduxToastr/>
-    <ThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
       <GlobalStyle/>
       <Routers/>
-    </ThemeProvider>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
   );
