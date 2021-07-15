@@ -4,8 +4,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#00dbff',
-      light: 'rgba(0, 219, 255, 0.225)',
+      main: '#ad5ddb',
+      light: 'rgba(173, 93, 219, 0.225)',
       // dark: '#000000',
       // contrastText: '#000000',
     },
@@ -14,11 +14,17 @@ const theme = createMuiTheme({
       light: 'rgba(249, 11, 125, 0.225)',
     },
     third: {
-      main: '#ad5ddb',
-      light: 'rgba(173, 93, 219, 0.225)',
+      main: '#00dbff',
+      light: 'rgba(0, 219, 255, 0.225)',
     },
     background: {
       main:'#fcfcfc',
+    },
+    whitee: {
+      main:'#fcfcfc',
+    },
+    blackee: {
+      main:'#111111',
     },
     navBarLink:{
       main:'#363636'

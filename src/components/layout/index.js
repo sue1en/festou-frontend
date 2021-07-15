@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Container } from '@material-ui/core';
 
 import Header from './header'
 import Footer from './footer'
@@ -12,11 +12,10 @@ const Layout = (props) => {
 
   return(
     <>
-      
       <Header/>
-      <div className={classes.mainBox}>
+      <Container className={classes.mainBox}>
         {props.children}
-      </div>
+      </Container> 
       <Footer/>
     </>
   )

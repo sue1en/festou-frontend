@@ -1,5 +1,3 @@
-
-
 const headerStyle = ((theme) => ({
   grow: {
     flexGrow: 1,
@@ -13,6 +11,9 @@ const headerStyle = ((theme) => ({
     position: 'absolute',
     top: 0,
     width: theme.spacing('100%'),
+  },
+  container:{
+    maxWidth:'1700px',
   },
   logo: {
     display: 'none',
@@ -29,15 +30,21 @@ const headerStyle = ((theme) => ({
       '& li':{
         "&:hover": {
           borderRadius:'20px',
-          backgroundColor: theme.palette.third.light,
+          backgroundColor: theme.palette.primary.light,
+          transition: 'background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
         },
       },
     },
   },
   munuItemStyle: {
+    '&:hover': {
+      textDecoration: 'none',
+      backgroundColor: 'rgba(30, 40, 50, 0.1)',
+    }
   },
+  
   textLink: {
-    color:theme.palette.navBarLink.main,
+    color:theme.palette.primary.dark,
     textDecoration:'none',
     fontWeight:'bold',
   },
@@ -48,7 +55,7 @@ const headerStyle = ((theme) => ({
       '& li':{
         "&:hover": {
           borderRadius:'10px',
-          backgroundColor: theme.palette.third.light,
+          backgroundColor: theme.palette.primary.light,
         },
       },
     }, 
@@ -57,26 +64,49 @@ const headerStyle = ((theme) => ({
 
 const mainStyle = {
   mainBox:{
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'center',
-    marginTop:'150px',
-    height:'100%',
-    width:'80vw',
-    flexGrow: 1,
+    marginTop:'120px',
+    maxWidth:'1500px',
+    // display:'flex',
+    // height:'100%',
+    // flexGrow: 1,
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   },
 }
 
-const footerStyle = {
-  root: {
-    backgroundColor: '#ccc',
-    position: 'relative',
-    bottom: 0,
-    width:'100%',
-    height: 100,
+const footerStyle = ((theme) => ({
+  grow: {
+    flexGrow: 1,
   },
-}
+  appBar: {
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+    height: '150px',
+    zIndex: theme.zIndex.drawer + 1,
+    position: 'relative',
+    width: theme.spacing('100%'),
+    backgroundColor:theme.palette.secondary.dark,
+    top: 'auto',
+    bottom: 0,
+  },
+  brandingBox:{
+    display: 'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
+    '& p':{
+    },
+    '& img': {
+      display: 'none',
+      width: '130px',
+      margin: '10px 50px 5px 50px',
+      [theme.breakpoints.up('xs')]: {
+        display: 'flex',
+      },
+    },
+  },
+}))
 
 export {
   headerStyle,

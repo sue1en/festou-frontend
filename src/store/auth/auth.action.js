@@ -15,12 +15,11 @@ export const signInAction = (data) => {
         saveAuth(result.data?.data)
         http.defaults.headers.token = result.data.data.token     
       }
-      console.log("###" + http.defaults.headers.token)
       dispatch({
         type: TYPES.SIGN_IN,
         data: result.data?.data
       })
-      toastr.success("Autenticado com sucesso")
+      toastr.success(`Autenticado com Sucesso!!`)
       navigate('/admin')
     } catch (error) {
       dispatch({ type: TYPES.SIGN_ERROR, data: error })

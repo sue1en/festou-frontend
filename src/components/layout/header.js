@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link as LinkRoute } from '@reach/router';
-import { fade, makeStyles } from '@material-ui/core/styles'
+import { fade, makeStyles, withStyles } from '@material-ui/core/styles'
 import { 
   Link,
   Menu,
@@ -11,6 +11,7 @@ import {
   MenuItem,
   IconButton,
   Typography,
+  Container,
 } from '@material-ui/core'
 //icons
 import MenuIcon from '@material-ui/icons/Menu'
@@ -25,6 +26,21 @@ import HeaderLogo from '../../assets/images/logo/FestouHeaderLogo.svg'
 
 const useStyles = makeStyles(headerStyle)
 
+// const StyledMenuItem = withStyles(() => ({
+//   root: {
+//     '&:hover': {
+//       '& .MuiListItem-button':{
+//         textDecoration: 'none',
+//         backgroundColor: 'rgba(30, 40, 50, 0.1)',
+//       }
+//     }
+//   },
+// }))(MenuItem);
+
+// const StyledMenuItem = withStyles(headerStyle)(({classes, ...other}) => (
+//   <MenuItem className={classes.munuItemStyle} {...other} />
+// ));
+
 const Header = () => {
   const dispatch = useDispatch()
   const classes = useStyles();
@@ -34,6 +50,9 @@ const Header = () => {
   const logout = () => {
     dispatch(signOutAction())
   };
+  
+  const isMenuOpen = Boolean(profileAnchorEl)
+  const isMobileMenuOpen = Boolean(mobileAnchorEl)
 
   const handleProfileMenuOpen = (event) => {
     setProfileAnchorEl(event.currentTarget);
@@ -58,8 +77,9 @@ const Header = () => {
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={Boolean(profileAnchorEl)}
+      open={isMenuOpen}
       onClose={handleProfileMenuClose}
+      onClick={handleMobileMenuClose}
     >
       <MenuItem onClick={handleProfileMenuClose}>
         <LinkRoute to="admin" className={classes.textLink}>
@@ -78,10 +98,11 @@ const Header = () => {
       id={menuMobile}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={Boolean(mobileAnchorEl)}
+      open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      onClick={handleMobileMenuClose}
     >
-      <MenuItem className={classes.menuItemStyle}>
+      <MenuItem>
         <LinkRoute to="products" className={classes.textLink}>
           Produtos
         </LinkRoute>
@@ -95,7 +116,7 @@ const Header = () => {
         (
           <div>
             <MenuItem className={classes.menuItemStyle}>
-              <LinkRoute color="primary" to="admin" className={classes.textLink}>
+              <LinkRoute to="admin" className={classes.textLink}>
                 Dashboard
               </LinkRoute>
             </MenuItem>
@@ -106,17 +127,17 @@ const Header = () => {
         ) : (
           <div>
             <MenuItem className={classes.menuItemStyle}>
-              <LinkRoute color="inherit" to="newsupplier" className={classes.textLink}> 
+              <LinkRoute to="newsupplier" className={classes.textLink}> 
                 Seja Parceiro
               </LinkRoute>
             </MenuItem>
             <MenuItem className={classes.menuItemStyle}>
-              <LinkRoute color="inherit" to="newclient" className={classes.textLink}> 
+              <LinkRoute to="newclient" className={classes.textLink}> 
                 Cadastrar
               </LinkRoute>
             </MenuItem>
             <MenuItem className={classes.menuItemStyle}>
-              <LinkRoute color="inherit" to="signin" className={classes.textLink}> 
+              <LinkRoute to="signin" className={classes.textLink}> 
                 Login
               </LinkRoute>
             </MenuItem>
@@ -128,60 +149,61 @@ const Header = () => {
   return(
     <div className={classes.grow}>
       <AppBar className={classes.appBar}>
-        <Toolbar>
-          <LinkRoute to="/">
-            <img src={HeaderLogo} alt='FestouLogo'className={classes.logo}/>
-          </LinkRoute>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <MenuItem ListItemClasses={classes.menuItemStyle}>
-              <LinkRoute to="products" className={classes.textLink}> 
-                Produtos
-              </LinkRoute>
-            </MenuItem>
-            <MenuItem className={classes.menuItemStyle}>
-              <LinkRoute to="aboutus" className={classes.textLink}> 
-                Sobre
-              </LinkRoute>
-            </MenuItem>
-            {isAuthenticated() ?
-              (
-                <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              ) : (
-                <div className={classes.sectionDesktop}>
-                  <MenuItem className={classes.menuItemStyle}>
-                    <LinkRoute to="newsupplier" className={classes.textLink}> 
-                      Seja Parceiro
-                    </LinkRoute>
-                  </MenuItem>
-                  <MenuItem className={classes.menuItemStyle}>
-                    <LinkRoute to="newclient" className={classes.textLink}>
-                      Cadastrar
-                    </LinkRoute>
-                  </MenuItem>
-                  <MenuItem className={classes.menuItemStyle}>
-                    <LinkRoute to="signin" className={classes.textLink}>
-                      Login
-                    </LinkRoute>
-                  </MenuItem>
-                </div>
-            )}
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton aria-label="show more" aria-haspopup="true" onClick={handleMobileMenuOpen}>
-              <MenuIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
+        <Container className={classes.container}>
+          <Toolbar>
+            <LinkRoute to="/">
+              <img src={HeaderLogo} alt='FestouLogo'className={classes.logo}/>
+            </LinkRoute>
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <MenuItem className={classes.menuItemStyle}>
+                <LinkRoute to="products" className={classes.textLink}> 
+                  Produtos
+                </LinkRoute>
+              </MenuItem>
+              <MenuItem className={classes.menuItemStyle}>
+                <LinkRoute to="aboutus" className={classes.textLink}> 
+                  Sobre
+                </LinkRoute>
+              </MenuItem>
+              {isAuthenticated() ?
+                (
+                  <IconButton
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                  >
+                    <AccountCircle fontSize="large" color="primary"/>
+                  </IconButton>
+                ) : (
+                  <div className={classes.sectionDesktop}>
+                    <MenuItem className={classes.menuItemStyle}>
+                      <LinkRoute to="newsupplier" className={classes.textLink}> 
+                        Seja Parceiro
+                      </LinkRoute>
+                    </MenuItem>
+                    <MenuItem className={classes.menuItemStyle}>
+                      <LinkRoute to="newclient" className={classes.textLink}>
+                        Cadastrar
+                      </LinkRoute>
+                    </MenuItem>
+                    <MenuItem className={classes.menuItemStyle}>
+                      <LinkRoute to="signin" className={classes.textLink}>
+                        Login
+                      </LinkRoute>
+                    </MenuItem>
+                  </div>
+              )}
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton aria-label="show more" aria-haspopup="true" onClick={handleMobileMenuOpen}>
+                <MenuIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </Container>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}

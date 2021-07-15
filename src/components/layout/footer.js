@@ -1,6 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {footerStyle} from './layoutStyle.js'
+import {
+  AppBar,
+  Container,
+  Typography,
+} from '@material-ui/core';
+
+import {footerStyle} from './layoutStyle.js';
+import BlackLogo from '../../assets/images/logo/FestouBlackLogo.svg';
+import WhiteLogo from '../../assets/images/logo/FestouWhiteLogo.svg'
 
 
 const useStyles = makeStyles(footerStyle)
@@ -9,20 +17,15 @@ const Footer = () => {
   const classes = useStyles()
 
   return(
-    <footer className={classes.root}>
-      <p>Footer aqui!</p>
-    </footer>
+    <div className={classes.grow}>
+      <AppBar className={classes.appBar}>
+        <div className={classes.brandingBox}>
+          <img src={WhiteLogo} alt='FestouFooterLogo'/>
+          <p>Todos os direitos reservados ©</p>
+        </div>
+      </AppBar>
+    </div>
   )
 }
 
 export default Footer;
-
-//estilos
-// const FooterTag = styled.footer`
-//   background-color:${props => props.theme.secondary};
-//     position: relative;
-//     bottom: 0;
-//     width: 100vw;
-//     height: 50px;
-//   /* height:40px; */
-// `

@@ -65,8 +65,9 @@ export const createSupplierAct = (data) => {
       dispatch({ type: TYPES.SUPPLIER_CREATE, data: result.data })
       toastr.success("Supplier", "Success! The new supplier has been registered.")
     } catch (error) {
-      toastr.error("Supplier", "Error! The new supplier wasn't registered" )
-      console.log(error)
+      const resultfail = await createSupplierSvc()
+      toastr.error("Error! The new supplier wasn't registered" )
+      console.log(resultfail)
     }
     console.log('disparar...', data)
   }
@@ -146,7 +147,7 @@ export const setStatusSupplierAct = (supplierId, ativo) => {
       const index = all.data.findIndex((item) => item.id === supplierId)
       all.data[index].status = result.data.data.status
 
-      dispatch({ type: TYPES.FORNECEDOR_ALL, data: [...all] })
+      dispatch({ type: TYPES.SUPPLIER_ALL, data: [...all] })
     } catch (err) {
       console.log('###', err)
     }
