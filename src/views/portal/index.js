@@ -27,7 +27,7 @@ const Menu = [
   {
     title: 'Category',
     icons: '',
-    route: '/categories/:id/*',
+    route: 'categories/:id',
     visubleMenu:true,
     enabled: true,
     component: Category

@@ -28,12 +28,13 @@ export const getAllCategoryAct = () => {
 
 export const getByIdCategoryAct = (categoryId) => {
   return async (dispatch) => {
+    dispatch({type:TYPES.CATEGORY_LOADING, status:true})
     try {
       // const { auth } = getState()
       const res = await getByIdCategorySvc(categoryId);
       dispatch ({
         type: TYPES.CATEGORY_BY_ID,
-        data:res.data
+        data:res.data.data
       })
     } catch (error){
         toastr.error("temos um error", error)

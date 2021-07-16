@@ -22,10 +22,11 @@ http.interceptors.response.use(
       case 401:
         store.dispatch(signOutAction())
         break
-      default:
-        break
-    }
+        default:
+          break
+        }
+    return Promise.reject(error.response);
   }
 );
-
+  
 export default http;

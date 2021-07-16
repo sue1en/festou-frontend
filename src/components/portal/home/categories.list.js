@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from '@reach/router';
 import {
   getAllCategoryAct,
-  createCategoryAct,
-  editCategoryAct,
-  updateCategoryAct,
-  deleteCategoryAct,
+  getByIdCategoryAct,
 } from '../../../store/categories/category.action';
 import{
   Grid,
@@ -58,12 +55,14 @@ const AllCategoriesList = () => {
   const [modal, setModal] = useState({})
     
   const category = useSelector(state => state.categories.all?.data);
-  const loading = useSelector(state => state.categories.loading);
-  const selected = useSelector(state => state.categories.selected);
+  // const loading = useSelector(state => state.categories.loading);
+  // const selected = useSelector(state => state.categories.selected);
+  // const getById = useSelector(state => state.categories.getById);
 
-const callCategory = useCallback(() => {
-  dispatch(getAllCategoryAct())
-  }, [dispatch]);
+
+  const callCategory = useCallback(() => {
+    dispatch(getAllCategoryAct())
+    }, [dispatch]);
 
   useEffect(() => {
     callCategory();
@@ -73,19 +72,23 @@ const callCategory = useCallback(() => {
   return (
     <Grid container className={classes.root}>
       {category?.map((category, i)=> (
-        <Card key={i} className={classes.card}>
-          <CardMedia
-            className={classes.media}
-            component='img'
-            src={process.env.REACT_APP_API + category.image}
-            alt={category.name}
-          />
-          <CardActionArea>
-            <CardContent className={classes.overlay}>
-              <p className={classes.text}><Link to="categories/:id/*">{category.name}</Link></p>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <Link to={`/categories/${category.id}`}>
+          <Card key={i} className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component='img'
+              src={process.env.REACT_APP_API + category.image}
+              alt={category.name}
+            />
+            <CardActionArea>
+              <CardContent className={classes.overlay}>
+                <p className={classes.text}>
+                  {category.name}
+                </p>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
       ))}
     </Grid>
   )

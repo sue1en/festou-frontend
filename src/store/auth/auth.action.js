@@ -23,7 +23,7 @@ export const signInAction = (data) => {
       navigate('/admin')
     } catch (error) {
       dispatch({ type: TYPES.SIGN_ERROR, data: error })
-      toastr.error("Usuário ou senha inválidos", error)
+      toastr.error("Ops!! Temos um erro", error.data['details'][0])
       navigate('/signin')
     }
   }

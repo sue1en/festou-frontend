@@ -58,7 +58,7 @@ function MemberProducts () {
         dispatch(updateProductAct(form, userId))
         return
       case 3:
-        dispatch(deleteProductAct(modal.id)).then(() => setModal(false))
+        dispatch(deleteProductAct(userId, modal.id)).then(() => setModal(false))
         return
       default:
         return false

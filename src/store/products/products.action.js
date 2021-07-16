@@ -45,6 +45,7 @@ export const createProductAct = (data) => {
     console.log('disparar...', data)
   }
 };
+
 export const getAllProductAct = () => {
   return async (dispatch) => {
     try {
@@ -69,20 +70,20 @@ export const getSupplierProductsAct = (supplierId) => {
   }
 }
 
-export const deleteProductAct = (productId) => {
+export const deleteProductAct = ( supplierId, productId ) => {
   return async (dispatch) => {
+    console.log('###', productId, '###', supplierId)
     try {
-      const result = await deleteProductSvc(productId)
-      dispatch({ type: TYPES.PRODUCT_EDIT, data: result.data })
+      await deleteProductSvc( supplierId, productId )
+      // dispatch({ type: TYPES.PRODUCT_EDIT, data: result.data.data })
       toastr.success('Produto', 'Removido com sucesso')
-      dispatch(getAllProductAct())
+      dispatch(getSupplierProductsAct(supplierId))
     } catch (error) {
       toastr.error('aconteceu um erro', error)
       toastr.error('Produto', error.toString())
     }
   }
 }
-
 
 export const editProductAct = (productId) => {
   return async (dispatch) => {

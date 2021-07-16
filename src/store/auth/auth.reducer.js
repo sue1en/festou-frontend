@@ -34,7 +34,6 @@ const reducer = ( state = INITIAL_STATE, action) => {
       return state
     case TYPES.SIGN_ERROR:
       state.loading = false
-      state.error = action.payload.details
       return state
     default: 
       return state

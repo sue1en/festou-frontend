@@ -95,6 +95,7 @@ const CategoryList = ({ data, modal, loading }) => {
                 {data.status ? 'ativo' : 'inativo'}
               </TableCell>
               <TableCell>
+                {/* DELETE E EDIT */}
                 {actions(data)}
               </TableCell>
             </TableRow> 

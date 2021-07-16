@@ -8,7 +8,7 @@ const headerStyle = ((theme) => ({
     height: '70px',
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor:theme.palette.background.main,
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     width: theme.spacing('100%'),
   },
