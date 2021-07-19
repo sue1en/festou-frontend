@@ -18,6 +18,8 @@ import styles from '../../assets/styles/userForm.style'
 //Icons
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles(styles)
 
@@ -59,7 +61,9 @@ const SignIn = () => {
   return(
     <Box className={classes.root}>
       <Box className={classes.mainBox}>
-        <h1> SignIn</h1>
+        <div className={classes.formTitleIcon}>
+         <PersonIcon/>
+        </div>
         <form className={classes.formStyled}>
           <TextField
             id='email'
@@ -109,14 +113,16 @@ const SignIn = () => {
           >
             Entrar
           </Button>
-          <div>
+          <div className={classes.redirectBox}>
             <p>Ainda não é cadastrado?</p>
             <p>
-              <Link to='/signin' variant='body2'>
-                &ensp;Cadastre-se como usuário
-              </Link> /
-              <Link to='/signin' variant='body2'>
-                &ensp;ou seja um parceiro
+              cadastre-se como 
+              <Link to='/newclient'>
+                usuário
+              </Link>
+              &ensp;/ ou seja um 
+              <Link to='/newsupplier'>
+                parceiro
               </Link>
             </p>
           </div>

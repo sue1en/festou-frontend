@@ -26,25 +26,27 @@ const useStyles = makeStyles({
   },
 
   card: {
-    width:320,
-    height: 320,
+    width:'300px',
+    height:'180px',
     margin: 16,
     borderRadius: 10,
-    // position:'relative',
-    background: '#eeeeee',
-    // alignItems:'center',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'flex-start',
+    '&:hover':{
+      
+    },
   },
-  media: {
-    height: '85%',
+  cardMedia: {
+    width: '100%',
+    alignSelf:'center',
   },
-  overlay: {
-    height: '15%',
-    // padding: 10,
-  },
-  text: {
+  cardText: {
+    position: 'absolute',
     textAlign: 'center',
     color:'#000000',
-    fontSize:20,
+    fontSize:'25px',
+    padding:'5px',
     textDecoration:'none',
   },
 })
@@ -74,19 +76,15 @@ const AllCategoriesList = () => {
       {category?.map((category, i)=> (
         <Link to={`/categories/${category.id}`}>
           <Card key={i} className={classes.card}>
+            <p className={classes.cardText}>
+              {category.name}
+            </p>
             <CardMedia
-              className={classes.media}
+              className={classes.cardMedia}
               component='img'
               src={process.env.REACT_APP_API + category.image}
               alt={category.name}
             />
-            <CardActionArea>
-              <CardContent className={classes.overlay}>
-                <p className={classes.text}>
-                  {category.name}
-                </p>
-              </CardContent>
-            </CardActionArea>
           </Card>
         </Link>
       ))}

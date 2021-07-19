@@ -91,7 +91,9 @@ const NewClient = () => {
    return(
     <Container className={classes.root}>
       <Box className={classes.mainBox}>
-        <h1> Crie sua conta </h1>
+        <h1 className={classes.formTitle}>
+          Crie sua conta
+        </h1>
         <form className={classes.formStyled}>
           <Box className={classes.textFieldBox}>
             <TextField
@@ -271,33 +273,34 @@ const NewClient = () => {
             {preview.length > 0
               ? (
                 <div className={classes.imageUploadBox}>
+                  <Box>
+                    <img src={preview} className={classes.profilePhoto} alt='Foto do perfil'/>
+                  </Box>
                   <Button 
                     fullWidth
                     color="secondary"
                     variant="contained"
-                    className={classes.styledButton}
+                    className={classes.imageButton}
                     onClick={removeImage}
                     component='label'
                     startIcon={<DeleteOutlineIcon/>}
                   >
                     Remover Imagem
                   </Button>
-                  <Box>
-                    <img src={preview} className={classes.profilePhoto} alt='Foto do perfil'/>
-                  </Box>
                 </div>
                 )
               : (
                 <div className={classes.imageUploadBox}>
+                  <PhotoIcon className={classes.profilePhoto}/>
                   <Button
                     fullWidth
                     variant='contained'
                     size='small'
                     component='label'
-                    className={classes.styledButton}
+                    className={classes.imageButton}
                     startIcon={<CloudUploadIcon />}
                     > 
-                    Upload Imagem
+                    Upload Imagem do perfil
                     <input
                       accept='image/*'
                       type='file'
@@ -306,7 +309,6 @@ const NewClient = () => {
                       onChange={previewImg}
                       />
                   </Button>
-                  <PhotoIcon className={classes.profilePhoto}/>
                 </div>
               )} 
           </Box>
@@ -321,14 +323,14 @@ const NewClient = () => {
             >
             Enviar
           </Button>
-          <Grid container>
-            <Grid item>
+          <div className={classes.redirectBox}>
+            <p>
               Já é cadastrado?
               <Link to='/signin' variant='body2'>
                 &ensp;Faça seu Login
               </Link>
-            </Grid>
-          </Grid>
+            </p>
+          </div>
         </form>
       </Box>
     </Container>
