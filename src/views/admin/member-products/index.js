@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import {
   getAllProductAct,
+  getByIdProductAct,
   createProductAct,
   editProductAct,
   updateProductAct,
@@ -18,6 +19,7 @@ import styled from 'styled-components'
 import ProductList from '../../../components/admin/products/product.table'
 import Form from '../../../components/admin/products/product.form'
 import Remove from '../../../components/admin/products/product.remove';
+import ProductDetails from '../../../components/admin/products/product.details';
 import DialogModal from '../../../components/dialog';
 
 function MemberProducts () {
@@ -28,6 +30,8 @@ function MemberProducts () {
   const loading = useSelector(state => state.products.loading);
   const selected = useSelector(state => state.products.selected);
   const userId = useSelector(state => state.auth.user?.id);
+  const getById = useSelector(state => state.products.getById);
+
 
 
   const callProduct = useCallback(() => {
@@ -49,7 +53,7 @@ function MemberProducts () {
     }
   }
 
-  const submitForm = (form) => {
+  const submitForm = (form, id) => {
     switch (modal.type){
       case 1:
         dispatch(createProductAct(form))
@@ -59,6 +63,9 @@ function MemberProducts () {
         return
       case 3:
         dispatch(deleteProductAct(userId, modal.id)).then(() => setModal(false))
+        return
+      case 4:
+        dispatch(getByIdProductAct(id))
         return
       default:
         return false
@@ -79,6 +86,7 @@ function MemberProducts () {
             {modal.type === 1 ? <Form close={closeModal} submit={submitForm}/> : null}
             {modal.type === 2 ? (<Form close={closeModal} submit={submitForm} data={selected}/>) : null}
             {modal.type === 3 ? (<Remove close={closeModal} remove={submitForm}/>) : null}
+            {modal.type === 4 ? (<ProductDetails data={selected}/>) : null}
         </DialogModal>
       </div>
     </CategoryBody>

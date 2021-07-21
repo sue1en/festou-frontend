@@ -77,7 +77,7 @@ const CategoryList = ({ data, modal, loading }) => {
             <TableRow key={i}>
               <TableCell>
                 {imgPath+data.image !== undefinedImg ? (
-                  <img src={imgPath + data.image} alt={`Cat ${data.name}`}  className={classes.media}/>
+                  <img src={imgPath + data.image} alt={`category ${data.name}`}  className={classes.media}/>
                 ) : (
                   <ImageIcon/>
                 )}

@@ -19,14 +19,13 @@ import formStyle from '../../../assets/styles/toModalForm.style'
 const useStyled = makeStyles(formStyle)
 
 const Form = ({submit, close, ...props}) => {
-  const classes = useStyled()
-  const [ preview, setPreview ] = useState('')
+  const classes = useStyled();
+  const [ preview, setPreview ] = useState('');
+  const [isEdit, setIsEdit] = useState(false);
   const [form, setForm ] = useState({
     status:false
   });
-  const [isEdit, setIsEdit] = useState(false)
   const percent = useSelector((state) => state.categories.upload?.percent || 0)
-  const loading = false;
 
   const handleChange = (props) => {
     const {value, name } = props.target
@@ -51,8 +50,8 @@ const Form = ({submit, close, ...props}) => {
 
   useEffect(() => {
     if(Object.keys(props).length > 0 && !isEdit){
-      setPreview(process.env.REACT_APP_API + props?.data?.image)
-      setForm(props.data)
+      setPreview(process.env.REACT_APP_API + props?.data.data.image)
+      setForm(props.data.data)
       setIsEdit(true)
     };
   }, []);

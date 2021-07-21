@@ -1,24 +1,34 @@
 const dashboardTableStyle =((theme) => ({
   root: {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    borderRadius:'5px',
+    boxShadow:`0 0 3px 1px #ccc`,
   },
   table:{
     minWidth:500,
   },
   mainHeadRow:{
-    flexGrow:1,
+    '& th':{
+      '&:last-child':{
+      },
+    },
   },
   secondaryHeadRow:{
-    backgroundColor: '#cccccc'
+    backgroundColor: theme.palette.secondary.light,
+    '& th':{
+      textAlign:'center',
+    },
   },
-  ButtonNewCategory:{
-    margin: theme.spacing(1),
+  ButtonNew:{
+    // margin: theme.spacing(1),
   },
   bodyTable:{
-    
+    '& td':{
+      textAlign:'center',
+    },
   },
   media:{
-    maxWidth:40,
+    maxWidth:60,
     fontSize:12,
   },
 }));

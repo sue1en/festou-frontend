@@ -40,9 +40,9 @@ export const createProductAct = (data) => {
       toastr.success('Produto', 'Produto cadastrado com sucesso')
       dispatch(getAllProductAct())
     } catch (error) {
-      toastr.error('Produto', 'deu ruim', error)
+      dispatch({ type: TYPES.SIGN_ERROR, data: error })
+      toastr.error('Ops! Temos um error', error.data['details'][0])
     }
-    console.log('disparar...', data)
   }
 };
 
@@ -53,10 +53,23 @@ export const getAllProductAct = () => {
       const result = await getAllProductSvc()
       dispatch({ type: TYPES.PRODUCT_ALL, data: result.data })
     } catch (error) {
-      toastr.error('aconteceu um erro', error)
+      dispatch({ type: TYPES.SIGN_ERROR, data: error })
+      toastr.error('Ops! Temos um error', error.data['details'][0])
     }
   }
 }
+
+export const getByIdProductAct = (productId) => {
+  return async (dispatch) => {
+    try{
+      const res = await getByIdProductSvc(productId);
+      dispatch({type: TYPES.PRODUCT_BY_ID, data: res.data.data })
+      console.log(res)
+    } catch (error){
+      toastr.error('Ops! Temos um error', error.data['details'][0])
+    }
+  }
+};
 
 export const getSupplierProductsAct = (supplierId) => {
   return async (dispatch) => {
@@ -65,7 +78,8 @@ export const getSupplierProductsAct = (supplierId) => {
       const result = await getSupplierProductsSvc(supplierId)
       dispatch({ type: TYPES.PRODUCT_BY_SUPPLIER, data: result.data.data })
     } catch (error) {
-      toastr.error('aconteceu um erro', error)
+      dispatch({ type: TYPES.SIGN_ERROR, data: error })
+      toastr.error('Ops! Temos um error', error.data['details'][0])
     }
   }
 }
@@ -79,8 +93,8 @@ export const deleteProductAct = ( supplierId, productId ) => {
       toastr.success('Produto', 'Removido com sucesso')
       dispatch(getSupplierProductsAct(supplierId))
     } catch (error) {
-      toastr.error('aconteceu um erro', error)
-      toastr.error('Produto', error.toString())
+      dispatch({ type: TYPES.SIGN_ERROR, data: error })
+      toastr.error('Ops! Temos um error', error.data['details'][0])
     }
   }
 }
@@ -129,14 +143,13 @@ export const updateProductAct = ( data, supplierId ) => {
     updateProductSvc(supplierId, data.id, formData, config)
       .then((result) => {
         // dispatch(editProductAct(categoryId))
-        dispatch(getSupplierProductsAct(supplierId))
         toastr.success('Product', 'Product atualizada com sucesso')
         dispatch({ type: TYPES.PRODUCT_UPLOAD })
+        dispatch(getSupplierProductsAct(supplierId))
       })
       .catch((error) => {
-        console.log(error)
         dispatch({ type: TYPES.SIGN_ERROR, data: error })
-        toastr.error('Product', error.toString())
+        toastr.error('Ops! Temos um error', error.data['details'][0])
       })
   }
 }

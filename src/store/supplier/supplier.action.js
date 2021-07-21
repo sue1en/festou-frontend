@@ -146,7 +146,7 @@ export const setStatusSupplierAct = (supplierId, ativo) => {
       const all = getState().suppliers.all
       const index = all.data.findIndex((item) => item.id === supplierId)
       all.data[index].status = result.data.data.status
-
+      dispatch(getByIdSupplierAct())
       dispatch({ type: TYPES.SUPPLIER_ALL, data: [...all] })
     } catch (err) {
       console.log('###', err)

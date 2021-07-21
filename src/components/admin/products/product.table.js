@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getByIdCategoryAct, getAllCategoryAct } from '../../../store/categories/category.action';
 import {
   makeStyles,
   Button,
   Fab,
   IconButton,
-  Collapse,
   Table,
   TableRow,
   TableCell,
@@ -15,6 +16,7 @@ import {
 //ICONS
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ImageIcon from '@material-ui/icons/Image';
 //STYLES
@@ -22,9 +24,9 @@ import tableStyle from '../../../assets/styles/tableList.style'
 
 const useStyles = makeStyles(tableStyle)
 
-const CategoryList = ({ data, modal, loading }) => {
+const ProductsList = ({ data, modal, loading }) => {
   const classes = useStyles()
-  
+
   const actions = ({ id }) => {
     return (
       <>
@@ -50,15 +52,16 @@ const CategoryList = ({ data, modal, loading }) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow className={classes.mainHeadRow}>
-            <TableCell align='left' colSpan={3}>
+            <TableCell align='left' colSpan={4}>
               Lista de Produtos
             </TableCell>
-            <TableCell>
+            <TableCell align='right' colSpan={3}>
               <Fab
-                variant="extended" 
+                variant="extended"
+                size="small"
                 color="secondary" 
                 aria-label="add" 
-                className={classes.ButtonNewCategory}
+                className={classes.ButtonNew}
                 onClick={() => modal(1, null)}
               >
                 Novo <AddIcon/>
@@ -70,6 +73,8 @@ const CategoryList = ({ data, modal, loading }) => {
             <TableCell>Nome</TableCell>
             <TableCell>Preço</TableCell>
             <TableCell>Status</TableCell>
+            <TableCell>Categoria</TableCell>
+            <TableCell>Info</TableCell>
             <TableCell>Ações</TableCell>
           </TableRow>
         </TableHead>
@@ -87,12 +92,21 @@ const CategoryList = ({ data, modal, loading }) => {
                 {data.name}
               </TableCell>
               <TableCell>
-                {/* TRATAR SWITCH */}
+                {/* TRATAR valor */}
                 {data.price}
               </TableCell>
               <TableCell>
                 {/* TRATAR SWITCH */}
-                {data.status ? 'ativo' : 'inativo'}
+                {data.status ? 'Ativo' : 'Inativo'}
+              </TableCell>
+              <TableCell>
+                {/* TRATAR SWITCH */}
+                {data.categories}
+              </TableCell>
+              <TableCell>
+                <IconButton  onClick={() => modal(4, data.id)}>
+                  <InfoIcon/>
+                </IconButton>
               </TableCell>
               <TableCell>
                 {/* DELETE E EDIT */}
@@ -106,4 +120,4 @@ const CategoryList = ({ data, modal, loading }) => {
   )
 }
 
-export default CategoryList
+export default ProductsList

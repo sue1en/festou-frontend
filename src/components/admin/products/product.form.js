@@ -14,6 +14,7 @@ import {
   TextareaAutosize,
   FormControlLabel,
 } from '@material-ui/core'
+import InputMask from 'react-input-mask'
 //ICONS
 import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -32,7 +33,6 @@ const Form = ({submit, close, ...props}) => {
     status:false,
   });
   const category = useSelector(state => state.categories.all?.data);
-  console.log("##___CAT___" + category)
   // const percent = useSelector((state) => state.products.upload?.percent || 0);
   // const loading = false;
 
@@ -53,6 +53,7 @@ const Form = ({submit, close, ...props}) => {
     const newForm = {
       ...form,
       status: form.status ? form.status.toString() : 'false',
+      price: parseInt(form.price.replace(/[R,$,' ']/g,'')),
       categoriesId: form.categories
     }
     submit(newForm)
@@ -127,10 +128,10 @@ const Form = ({submit, close, ...props}) => {
           onChange={handleChange}
           // disabled={loading}
         />
-        <div>
+        {/* <div>
           {JSON.stringify(form)}
           {JSON.stringify(category)}
-        </div>
+        </div> */}
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-age-native-simple">Categoria</InputLabel>
           <Select
