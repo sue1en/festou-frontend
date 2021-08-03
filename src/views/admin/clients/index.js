@@ -3,7 +3,7 @@ import React from 'react'
 function Clients () {
    return (
     <div>
-      <h1>CLIENTE CLIENTE CLIENTE</h1>
+      <h1>CLIENTE</h1>
       <br/>
       <hr/>
       <br/>

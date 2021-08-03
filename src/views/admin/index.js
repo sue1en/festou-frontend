@@ -10,8 +10,9 @@ import { useSelector } from 'react-redux';
 import {
   Category as CategoryIcon,
   LocalMall as ProductsIcon,
-  BusinessCenter as FornecedoresIcon,
+  BusinessCenter as SupplierIcon,
   People as ClientsIcon,
+  Home as DashboardHomeIcon,
 } from '@material-ui/icons';
 
 const Menu = [
@@ -23,7 +24,7 @@ const Menu = [
     enabled: true,
     component: Home,
     authorization: [1, 2, 3],
-    icon: <></>
+    icon: <DashboardHomeIcon/>
   },
   {
     title: 'Categories',
@@ -63,7 +64,7 @@ const Menu = [
     enabled: true,
     component: Suppliers,
     authorization: [1],
-    icon:<FornecedoresIcon/>
+    icon:<SupplierIcon/>
   },
   {
     title: 'Clients',

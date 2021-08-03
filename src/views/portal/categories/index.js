@@ -87,16 +87,12 @@ const Category = () =>{
   const loading = useSelector(state => state.categories.loading);
   
   const callCategory = useCallback(() => {
-    console.log(params.id)
     dispatch(getByIdCategoryAct(params.id))
   }, [dispatch]);
-  
-  console.log(JSON.stringify(categoryById))
 
   useEffect(() => {
     callCategory();
   }, [callCategory]);
-
 
   if(loading){
     return <h1>Loading...</h1>

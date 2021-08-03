@@ -251,6 +251,8 @@ const NewSupplier = () => {
               variant="outlined"
               required
               fullWidth
+              multiline
+              rows={5}
               id='description'
               name='description'
               label='Descreva suas atividades'

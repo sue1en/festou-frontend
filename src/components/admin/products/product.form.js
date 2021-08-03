@@ -103,7 +103,6 @@ const Form = ({submit, close, ...props}) => {
         <TextField
           className={classes.textFieldStyle}
           required
-          multiline
           fullWidth
           variant="outlined"
           id='price'

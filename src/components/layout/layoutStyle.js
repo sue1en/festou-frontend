@@ -64,7 +64,7 @@ const headerStyle = ((theme) => ({
 
 const mainStyle = {
   mainBox:{
-    marginTop:'120px',
+    marginTop:'100px',
     maxWidth:'1500px',
     // display:'flex',
     // height:'100%',

@@ -30,9 +30,13 @@ export const getAllClientAct = () => {
 
 export const getByIdClientAct = (clientId) => {
   return async (dispatch) => {
+    dispatch({type:TYPES.CLIENT_LOADING, status:true})
     try{
       const res = await getByIdClientSvc(clientId);
-      dispatch({type: TYPES.CLIENT_BY_ID, data: res.data })
+      dispatch({
+        type: TYPES.CLIENT_BY_ID,
+        data: res.data.data
+      })
     } catch (error){
       toastr.error("temos um erro", error )
     }

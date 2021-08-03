@@ -4,11 +4,12 @@ import thunk from 'redux-thunk';
 import multi from 'redux-multi';
 
 import { reducer as toastrReducer } from 'react-redux-toastr';
-import SignReducer from './auth/auth.reducer'
-import CategoryReducer from './categories/category.reducer'
-import SupplierReducer from './supplier/supplier.reducer'
-import ProductReducer from './products/products.reducer'
-import ClientReducer from './clients/clients.reducer'
+import SignReducer from './auth/auth.reducer';
+import CategoryReducer from './categories/category.reducer';
+import SupplierReducer from './supplier/supplier.reducer';
+import ProductReducer from './products/products.reducer';
+import ClientReducer from './clients/clients.reducer';
+import AdminReducer from './admin/admin.reduce'
 
 const reducers = combineReducers({
   auth: SignReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   suppliers: SupplierReducer,
   products: ProductReducer,
   clients: ClientReducer,
+  admin: AdminReducer,
 })
 
 const middleware = [thunk, multi]

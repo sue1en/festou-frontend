@@ -16,6 +16,7 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import AddIcon from '@material-ui/icons/Add';
+import InfoIcon from '@material-ui/icons/Info';
 import ImageIcon from '@material-ui/icons/Image';
 //STYLES
 import tableStyle from '../../../assets/styles/tableList.style'
@@ -50,10 +51,10 @@ const CategoryList = ({ data, modal, loading }) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow className={classes.mainHeadRow}>
-            <TableCell align='left' colSpan={3}>
+            <TableCell align='left' colSpan={4}>
               Lista de Categorias
             </TableCell>
-            <TableCell>
+            <TableCell align='right' colSpan={1}>
               <Fab
                 variant="extended" 
                 color="secondary" 
@@ -69,6 +70,7 @@ const CategoryList = ({ data, modal, loading }) => {
             <TableCell>Imagem</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>Status</TableCell>
+            <TableCell>Categorias</TableCell>
             <TableCell>Ações</TableCell>
           </TableRow>
         </TableHead>
@@ -88,6 +90,11 @@ const CategoryList = ({ data, modal, loading }) => {
               <TableCell>
                 {/* TRATAR SWITCH */}
                 {data.status ? 'ativo' : 'inativo'}
+              </TableCell>
+              <TableCell>
+                <IconButton  onClick={() => modal(4, data.id)}>
+                  <InfoIcon/>
+                </IconButton>
               </TableCell>
               <TableCell>
                 {actions(data)}
