@@ -34,11 +34,6 @@ const SignIn = () => {
   const loading = useSelector((state) => state.auth.loading);
   const error = useSelector(state => state.auth.error);
 
-  // const [visible, setVisible] = useState(true);
-  // const onDismiss = () => setVisible(false);
-
-  // const closeError = () => setVisible(false);
-
   const handleChange = (props) => {
     const { value, name } = props.target
     setForm({
@@ -51,12 +46,6 @@ const SignIn = () => {
     e.preventDefault()
     dispatch(signInAction(form))
   };
-
-  // useEffect(()=> {
-  //   setVisible(error.length > 0)
-  //   setTimeout(() => setVisible(false), 5000);
-  // }, [error])
-
 
   return(
     <Box className={classes.root}>
@@ -78,7 +67,7 @@ const SignIn = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <EmailIcon/>
+                  <EmailIcon className={classes.inputIcon}/>
                 </InputAdornment>
               ),
             }}
@@ -97,7 +86,7 @@ const SignIn = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <LockIcon/>
+                  <LockIcon className={classes.inputIcon}/>
                 </InputAdornment>
               ),
             }}

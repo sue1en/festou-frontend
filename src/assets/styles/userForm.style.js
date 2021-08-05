@@ -33,13 +33,8 @@ const newUserFormStyle = ((theme) => ({
     maxWidth: '450px',
   },
   textFieldBox:{
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent:'center', 
-    // padding: "25px", 
-    // backgroundColor:'#fff',
   },
+  
   textFieldStyle:{
     marginBottom: '25px',
     '& .MuiOutlinedInput-root': {
@@ -54,7 +49,9 @@ const newUserFormStyle = ((theme) => ({
         borderColor: theme.palette.primary.main,
       },
     },
-    
+  },
+  inputIcon:{
+    color: theme.palette.blackee.light,
   },
   imageMainBox:{
     

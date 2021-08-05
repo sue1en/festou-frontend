@@ -102,11 +102,6 @@ const Header = () => {
       onClose={handleMobileMenuClose}
       onClick={handleMobileMenuClose}
     >
-      <MenuItem>
-        <LinkRoute to="products" className={classes.textLink}>
-          Produtos
-        </LinkRoute>
-      </MenuItem>
       <MenuItem ListItemClasses={classes.menuItemStyle}>
         <LinkRoute to="aboutus" className={classes.textLink}>
           Sobre nós
@@ -156,11 +151,6 @@ const Header = () => {
             </LinkRoute>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <MenuItem className={classes.menuItemStyle}>
-                <LinkRoute to="products" className={classes.textLink}> 
-                  Produtos
-                </LinkRoute>
-              </MenuItem>
               <MenuItem className={classes.menuItemStyle}>
                 <LinkRoute to="aboutus" className={classes.textLink}> 
                   Sobre

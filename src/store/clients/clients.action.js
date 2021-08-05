@@ -20,7 +20,7 @@ export const getAllClientAct = () => {
       const all = await getAllClientSvc()
       dispatch({
         type: TYPES.CLIENT_ALL,
-        data: all.data
+        data: all.data.data
       })
     } catch (error){ 
       toastr.error("temos um error", error)

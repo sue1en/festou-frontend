@@ -79,7 +79,6 @@ const Menu = [
   },
 ]
 
-
 export const getMenuFiltered = (userKind, isFilterVisible) => {
   
   let _menu = Menu.filter(menu => menu.authorization.indexOf(userKind) > -1)

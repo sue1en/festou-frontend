@@ -4,10 +4,6 @@ import {
   getAllSupplierAct,
   getByIdSupplierAct,
   setStatusSupplierAct,
-  createSupplierAct,
-  editSupplierAct,
-  updateSupplierAct,
-  deleteSupplierAct,
 } from '../../../store/supplier/supplier.action';
 
 import SupplierList from '../../../components/admin/suppliers/supplier.table'

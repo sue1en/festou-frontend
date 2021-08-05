@@ -9,6 +9,8 @@ const dashboardTableStyle =((theme) => ({
   },
   mainHeadRow:{
     '& th':{
+      color: theme.palette.blackee.main,
+      fontSize:'20px',
       '&:last-child':{
       },
     },

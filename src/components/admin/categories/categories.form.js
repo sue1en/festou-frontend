@@ -120,6 +120,9 @@ const Form = ({submit, close, ...props}) => {
           {preview.length > 0
             ? (
               <div className={classes.imageUploadBox}>
+                <Box>
+                  <img src={preview} className={classes.profilePhoto} alt='Imagem da Categoria'/>
+                </Box>
                 <Button 
                   fullWidth
                   color="secondary"
@@ -131,13 +134,11 @@ const Form = ({submit, close, ...props}) => {
                 >
                   Remover Imagem
                 </Button>
-                <Box>
-                  <img src={preview} className={classes.profilePhoto} alt='Imagem da Categoria'/>
-                </Box>
               </div>
               )
             : (
               <div className={classes.imageUploadBox}>
+                <PhotoIcon className={classes.profilePhoto}/>
                 <Button
                   fullWidth
                   variant='contained'
@@ -155,7 +156,6 @@ const Form = ({submit, close, ...props}) => {
                     onChange={previewImg}
                     />
                 </Button>
-                <PhotoIcon className={classes.profilePhoto}/>
               </div>
             )} 
         </Box>
@@ -166,14 +166,14 @@ const Form = ({submit, close, ...props}) => {
           type='button'
           onClick={handleSubmit}
           className={classes.styledButton}
-        >
+          >
           {isEdit ? 'Atualizar' : 'Enviar'}
         </Button>
         <Button
-          size="small"
+          size="large"
           onClick={close}
+          className={classes.styledButton}
           variant="contained"
-          color="secondary"
         >
           Não
         </Button>

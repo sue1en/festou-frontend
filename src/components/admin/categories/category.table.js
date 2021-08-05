@@ -51,7 +51,7 @@ const CategoryList = ({ data, modal, loading }) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow className={classes.mainHeadRow}>
-            <TableCell align='left' colSpan={4}>
+            <TableCell align='left' colSpan={3}>
               Lista de Categorias
             </TableCell>
             <TableCell align='right' colSpan={1}>
@@ -70,7 +70,6 @@ const CategoryList = ({ data, modal, loading }) => {
             <TableCell>Imagem</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell>Categorias</TableCell>
             <TableCell>Ações</TableCell>
           </TableRow>
         </TableHead>
@@ -90,11 +89,6 @@ const CategoryList = ({ data, modal, loading }) => {
               <TableCell>
                 {/* TRATAR SWITCH */}
                 {data.status ? 'ativo' : 'inativo'}
-              </TableCell>
-              <TableCell>
-                <IconButton  onClick={() => modal(4, data.id)}>
-                  <InfoIcon/>
-                </IconButton>
               </TableCell>
               <TableCell>
                 {actions(data)}

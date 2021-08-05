@@ -114,7 +114,7 @@ const NewSupplier = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <StoreMallDirectoryIcon/>
+                    <StoreMallDirectoryIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }} 
@@ -139,7 +139,7 @@ const NewSupplier = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
-                        <DescriptionIcon/>
+                        <DescriptionIcon className={classes.inputIcon}/>
                       </InputAdornment>
                     ),
                   }} 
@@ -160,7 +160,7 @@ const NewSupplier = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <HomeWorkIcon/>
+                    <HomeWorkIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }} 
@@ -239,7 +239,7 @@ const NewSupplier = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
-                        <PhoneIcon/>
+                        <PhoneIcon className={classes.inputIcon}/>
                       </InputAdornment>
                     ),
                   }} 
@@ -262,7 +262,7 @@ const NewSupplier = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <SubjectIcon/>
+                    <SubjectIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }} 
@@ -280,7 +280,7 @@ const NewSupplier = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <EmailIcon/>
+                    <EmailIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }}
@@ -299,7 +299,7 @@ const NewSupplier = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <LockIcon/>
+                    <LockIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }}

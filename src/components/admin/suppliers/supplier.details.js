@@ -2,15 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
-  List,
-  ListItem,
   makeStyles,
   Table,
   TableRow,
   TableCell,
   TableBody,
   TableHead,
-  Divider,
 } from '@material-ui/core'
 //ICONS
 

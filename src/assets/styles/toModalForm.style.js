@@ -1,4 +1,4 @@
-const modalFormStyle = {
+const modalFormStyle = ((theme) => ({
   root:{
     flexGrow:1,
   },
@@ -25,7 +25,8 @@ const modalFormStyle = {
   },
   imageMainBox:{
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
+    margin:'15px',
 
   },
   imageUploadBox: {
@@ -35,18 +36,29 @@ const modalFormStyle = {
     
   },
   profilePhoto: {
-    height:'90px',
-    width:'90px',
+    height:'150px',
+    width:'150px',
     marginLeft:'10px',
     border:'solid',
     borderWidth:'1px',
-    borderColor: '#000000',
+    borderColor:  theme.palette.blackee.main,
     borderRadius:'4px',
   },
   styledButton:{
-    marginBottom:'10px',
-    backgroundColor:'#ffb74d',
+    margin:'10px',
+    minWidth: '120px',
+    color:'#ffffff',
+    backgroundColor:theme.palette.primary.main,
+    '&:last-child':{
+      backgroundColor:theme.palette.secondary.main,
+      '&:hover':{
+        backgroundColor:theme.palette.secondary.dark,
+      }
+    },
+    '&:hover':{
+      backgroundColor:theme.palette.primary.dark,
+    }
   }
-}
+}))
 
 export default modalFormStyle;

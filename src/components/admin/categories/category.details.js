@@ -2,15 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
-  List,
-  ListItem,
   makeStyles,
-  Table,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableHead,
-  Divider,
 } from '@material-ui/core'
 //ICONS
 
@@ -24,7 +16,7 @@ const CategoryDetails = ({data}) => {
   return (
     <Box className={classes.mainBox}>
       <h2>Descrição da Categoria:</h2>
-      <p>{data.description}</p>     
+      {data.description} 
     </Box>
   )
 };

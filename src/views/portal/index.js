@@ -2,7 +2,6 @@ import { Router } from '@reach/router'
 import Layout from '../../components/layout'
 import Home from './home';
 import Category from './categories';
-import Products from './products';
 import Suppliers from './suppliers';
 import NewClient from '../auth/newClient';
 import NewSupplier from '../auth/newSupplier';
@@ -31,14 +30,6 @@ const Menu = [
     visubleMenu:true,
     enabled: true,
     component: Category
-  },
-  {
-    title: 'Products',
-    icons: '',
-    route: '/products',
-    visubleMenu:true,
-    enabled: true,
-    component: Products
   },
   {
     title: 'Suppliers',

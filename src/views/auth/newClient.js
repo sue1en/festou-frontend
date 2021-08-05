@@ -110,7 +110,7 @@ const NewClient = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <PersonIcon/>
+                    <PersonIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }} 
@@ -145,7 +145,7 @@ const NewClient = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <HomeIcon/>
+                    <HomeIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }} 
@@ -224,7 +224,7 @@ const NewClient = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
-                        <PhoneIcon/>
+                        <PhoneIcon className={classes.inputIcon}/>
                       </InputAdornment>
                     ),
                   }} 
@@ -244,7 +244,7 @@ const NewClient = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <EmailIcon/>
+                    <EmailIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }}
@@ -263,7 +263,7 @@ const NewClient = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <LockIcon/>
+                    <LockIcon className={classes.inputIcon}/>
                   </InputAdornment>
                 ),
               }}

@@ -14,12 +14,11 @@ import {
   deleteProductAct,
   getSupplierProductsAct,
 } from '../../../store/products/products.action';
-import styled from 'styled-components'
 //COMPONENTS
-import ProductList from '../../../components/admin/products/product.table'
-import Form from '../../../components/admin/products/product.form'
-import Remove from '../../../components/admin/products/product.remove';
-import ProductDetails from '../../../components/admin/products/product.details';
+import ProductList from '../../../components/admin/member-products/product.table'
+import Form from '../../../components/admin/member-products/product.form'
+import Remove from '../../../components/admin/member-products/product.remove';
+import ProductDetails from '../../../components/admin/member-products/product.details';
 import DialogModal from '../../../components/dialog';
 
 function MemberProducts () {
@@ -31,8 +30,6 @@ function MemberProducts () {
   const selected = useSelector(state => state.products.selected);
   const userId = useSelector(state => state.auth.user?.id);
   const getById = useSelector(state => state.products.getById);
-
-
 
   const callProduct = useCallback(() => {
     dispatch(getSupplierProductsAct(userId))
@@ -73,31 +70,22 @@ function MemberProducts () {
   }
   
   return (
-    <CategoryBody>
+    <div>
       <div>
-        <div>
-          <ProductList data={myProducts} loading={loading} modal={openModal}/>
-        </div>
-        <DialogModal
-          open={modal.status || false}
-          close={closeModal}
-          title='produtos'  
-        >
-            {modal.type === 1 ? <Form close={closeModal} submit={submitForm}/> : null}
-            {modal.type === 2 ? (<Form close={closeModal} submit={submitForm} data={selected}/>) : null}
-            {modal.type === 3 ? (<Remove close={closeModal} remove={submitForm}/>) : null}
-            {modal.type === 4 ? (<ProductDetails data={selected}/>) : null}
-        </DialogModal>
+        <ProductList data={myProducts} loading={loading} modal={openModal}/>
       </div>
-    </CategoryBody>
+      <DialogModal
+        open={modal.status || false}
+        close={closeModal}
+        title='produtos'  
+      >
+          {modal.type === 1 ? <Form close={closeModal} submit={submitForm}/> : null}
+          {modal.type === 2 ? (<Form close={closeModal} submit={submitForm} data={selected}/>) : null}
+          {modal.type === 3 ? (<Remove close={closeModal} remove={submitForm}/>) : null}
+          {modal.type === 4 ? (<ProductDetails data={selected}/>) : null}
+      </DialogModal>
+    </div>
   )
 };
 
 export default MemberProducts;
-
-const CategoryBody = styled.div`
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`

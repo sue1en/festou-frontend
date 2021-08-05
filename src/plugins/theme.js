@@ -25,6 +25,7 @@ const theme = createMuiTheme({
     },
     blackee: {
       main:'#111111',
+      light:'#828282',
     },
     navBarLink:{
       main:'#363636'

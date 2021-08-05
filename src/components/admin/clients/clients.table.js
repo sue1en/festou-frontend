@@ -1,9 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   makeStyles,
-  Button,
-  Fab,
-  IconButton,
   Table,
   TableRow,
   TableCell,
@@ -18,7 +16,7 @@ import tableStyle from '../../../assets/styles/tableList.style'
 
 const useStyles = makeStyles(tableStyle)
 
-const ProductsList = ({ data, loading }) => {
+const ClientsList = ({ data, loading }) => {
   const classes = useStyles()
 
   const imgPath = process.env.REACT_APP_API;
@@ -40,14 +38,17 @@ const ProductsList = ({ data, loading }) => {
           <TableRow className={classes.secondaryHeadRow}>
             <TableCell>Imagem</TableCell>
             <TableCell>Nome</TableCell>
-            <TableCell>Preço</TableCell>
+            <TableCell>Email</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell>Fornecedor</TableCell>
-            <TableCell>Categoria</TableCell>
+            <TableCell>Telefone</TableCell>
+            <TableCell>Endereço</TableCell>
+            <TableCell>Cidade</TableCell>
+            <TableCell>Uf</TableCell>
+            <TableCell>Data de Nascimento</TableCell>
           </TableRow>
         </TableHead>
         <TableBody className={classes.bodyTable}>
-          {data?.map((data, i)=> (
+          {data.map((data, i)=> (
             <TableRow key={i}>
               <TableCell>
                 {imgPath+data.image !== undefinedImg ? (
@@ -60,16 +61,25 @@ const ProductsList = ({ data, loading }) => {
                 {data.name}
               </TableCell>
               <TableCell>
-                {data.price}
+                {data.email}
               </TableCell>
               <TableCell>
                 {data.status ? 'Ativo' : 'Inativo'}
               </TableCell>
               <TableCell>
-                {data.supplier}
+                {data.phoneNumber}
               </TableCell>
               <TableCell>
-                {data.categories}
+                {data.address}
+              </TableCell>
+              <TableCell>
+                {data.city}
+              </TableCell>
+              <TableCell>
+                {data.uf}
+              </TableCell>
+              <TableCell>
+                {data.birthdate}
               </TableCell>
             </TableRow> 
           ))}
@@ -79,4 +89,4 @@ const ProductsList = ({ data, loading }) => {
   )
 }
 
-export default ProductsList
+export default ClientsList
